@@ -1,0 +1,48 @@
+.CircleContainer {
+        
+        height: 600px;
+        width: 600px;
+        background: grey;
+        border-radius: 300px;
+        display: inline-block; 
+        margin: auto; 
+
+        .ContentContainer {
+            display: flex;
+            flex-direction: column; 
+            justify-content: center;
+            width: 250px; 
+            height: 400px; 
+            margin: auto; 
+            padding-top: 70px; 
+
+            label {
+                display: flex; 
+                flex-direction: row; 
+                justify-content: flex-end;
+                width: 100%;  
+                text-align: right; 
+                line-height: 20px; 
+                margin: auto; 
+
+                input {
+                    height: 30px; 
+                    flex: 0 0 200px; 
+                    margin: 0 0 20px 10px; 
+                }   
+            }
+            .submitButton{
+                margin-left: 90px; 
+            }
+
+            button {
+                border: none;
+                padding: 0;
+                margin: 20px 0 0 -10px; 
+                background: none;
+                text-transform: uppercase;
+            }
+            
+
+        }
+}

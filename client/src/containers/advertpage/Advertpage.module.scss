@@ -1,0 +1,27 @@
+
+
+.mainContainer{
+    max-height: 100vh; 
+    max-width: 100%; 
+    display: flex; 
+    margin: auto; 
+
+    .leftContainer{
+        width: 50%; 
+        margin: auto; 
+    }
+
+    .rightContainer{
+        width:50%; 
+
+        .imageContainer{
+            width: 500px; 
+            height: 400px; 
+        }
+
+        img{ 
+            width: 100%; 
+            height: 100%; 
+        }
+    }
+}
