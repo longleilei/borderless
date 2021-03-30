@@ -35,17 +35,17 @@ function DepositModal ({ open }) {
   const [ tokenInfo, setTokenInfo ] = useState({});
   const [ value, setValue ] = useState('');
 
-  // useEffect(() => {
-  //   async function getTokenInfo () {
-  //     if (currency && networkService.web3.utils.isAddress(currency)) {
-  //       const tokenInfo = await getToken(currency);
-  //       setTokenInfo(tokenInfo);
-  //     } else {
-  //       setTokenInfo({});
-  //     }
-  //   }
-  //   getTokenInfo();
-  // }, [ currency ]);
+  useEffect(() => {
+    async function getTokenInfo () {
+      if (currency && networkService.web3.utils.isAddress(currency)) {
+        const tokenInfo = await getToken(currency);
+        setTokenInfo(tokenInfo);
+      } else {
+        setTokenInfo({});
+      }
+    }
+    getTokenInfo();
+  }, [ currency ]);
 
   const handleClose = useCallback(() => {
     setCurrency(ETH);

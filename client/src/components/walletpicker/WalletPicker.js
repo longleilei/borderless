@@ -14,6 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 import React, { useCallback, useState, useEffect, useRef } from 'react';
+import { Link, useHistory, useLocation  } from 'react-router-dom'; 
 import { useSelector, useDispatch } from 'react-redux';
 
 import WrongNetworkModal from 'containers/modals/wrongnetwork/WrongNetworkModal';
@@ -25,18 +26,15 @@ import { setWalletMethod } from 'actions/setupAction';
 import { getShortNetworkName, getAlternateNetworks } from 'util/networkName';
 import config from 'util/config';
 
-import logo from 'images/omg_logo.svg';
-import chevron from 'images/chevron.svg';
-import browserwallet from 'images/browserwallet.png';
-import coinbase from 'images/coinbase.jpg';
-import walletconnect from 'images/walletconnect.png';
-
 import * as styles from './WalletPicker.module.scss';
 
 function WalletPicker ({ onEnable }) {
+  const history = useHistory(); 
+  const location = useLocation();
   const dispatch = useDispatch();
-  const dropdownNode = useRef(null);
+  //const dropdownNode = useRef(null);
 
+  const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
   const [ walletEnabled, setWalletEnabled ] = useState(false);
   const [ accountsEnabled, setAccountsEnabled ] = useState(false);
   const [ wrongNetwork, setWrongNetwork ] = useState(false);
@@ -48,6 +46,12 @@ function WalletPicker ({ onEnable }) {
   const dispatchSetWalletMethod = useCallback((methodName) => {
     dispatch(setWalletMethod(methodName));
   }, [ dispatch ]);
+
+  const logout = () => {
+    dispatch({ type: 'LOGOUT'}); 
+    history.push("/"); 
+    setUser(null); 
+  };
 
   useEffect(() => {
     async function enableBrowserWallet () {
@@ -128,15 +132,15 @@ function WalletPicker ({ onEnable }) {
     }
   }, [ dispatch, walletEnabled, wrongNetwork ]);
 
-  useEffect(() => {
-    function handleClick (e) {
-      if (!dropdownNode.current.contains(e.target)) {
-        setShowAlternateNetworks(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClick);
-    return () => document.removeEventListener('mousedown', handleClick);
-  }, []);
+  // useEffect(() => {
+  //   function handleClick (e) {
+  //     if (!dropdownNode.current.contains(e.target)) {
+  //       setShowAlternateNetworks(false);
+  //     }
+  //   }
+  //   document.addEventListener('mousedown', handleClick);
+  //   return () => document.removeEventListener('mousedown', handleClick);
+  // }, []);
 
   function resetSelection () {
     dispatchSetWalletMethod(null);
@@ -153,105 +157,29 @@ function WalletPicker ({ onEnable }) {
 
   return (
     <>
-      <WrongNetworkModal
-        open={wrongNetworkModalState}
-        onClose={resetSelection}
-      />
-
-      <div className={styles.WalletPicker}>
-        <div className={styles.title}>
-          <img src={logo} alt='logo' />
-          <div className={styles.menu}>
-            <a
-              href='https://docs.omg.network/wallet/web-wallet-quick-start'
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              About
-            </a>
-
-            <div
-              onClick={() => setShowAlternateNetworks(prev => !prev)}
-              className={styles.network}
-            >
-              <div className={styles.indicator} />
-              <div>
-                OMG Network:&nbsp;
-                {getShortNetworkName()}
-              </div>
-              {!!alternateNetworks.length && (
-                <img
-                  src={chevron}
-                  alt='chevron'
-                  className={[
-                    styles.chevron,
-                    showAlternateNetworks ? styles.open : ''
-                  ].join(' ')}
-                />
-              )}
-            </div>
-
-            <div ref={dropdownNode} className={styles.dropdown}>
-              {!!alternateNetworks.length && showAlternateNetworks && alternateNetworks.map((network, index) => (
-                <a key={index} href={network.url}>
-                  {network.name}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <span className={styles.directive}>
-          Select how you want to connect with the OMG Network.
-        </span>
-        <div className={styles.wallets}>
-          <div
-            className={[
-              styles.wallet,
-              !browserEnabled ? styles.disabled : ''
-            ].join(' ')}
-
-            onClick={() => dispatchSetWalletMethod('browser')}
-          >
-            <img src={browserwallet} alt='browserwallet' />
-            <h3>Browser Wallet</h3>
-            {browserEnabled && (
-              <div>
-                Use a browser wallet extension (e.g. Metamask) or a built-in browser wallet.
-              </div>
-            )}
-            {!browserEnabled && (
-              <div>Your browser does not have a web3 provider.</div>
-            )}
-          </div>
-
-          <div
-            className={[
-              styles.wallet,
-              !walletConnectEnabled ? styles.disabled : ''
-            ].join(' ')}
-            onClick={() => dispatchSetWalletMethod('walletconnect')}
-          >
-            <div className={styles.walletconnect}>
-              <img src={walletconnect} alt='walletconnect' />
-            </div>
-            <h3>WalletConnect</h3>
-            <div>Use a WalletConnect-compatible wallet.</div>
-          </div>
-
-          <div
-            className={[
-              styles.wallet,
-              !walletLinkEnabled ? styles.disabled : ''
-            ].join(' ')}
-            onClick={() => dispatchSetWalletMethod('walletlink')}
-          >
-            <img src={coinbase} alt='coinbase' />
-            <h3>WalletLink</h3>
-            <div>Use a Coinbase wallet.</div>
-          </div>
-        </div>
+    <div className={styles.WalletPicker}>
+    
+      <div className={styles.left}>
+            <div>Borderless</div>
       </div>
+
+      <div className={styles.middle}>
+          <div><Link to="/wallet">Wallet</Link></div>
+
+          <div onClick={() => dispatchSetWalletMethod('browser')}> <Link to="/home">Transfer</Link></div>
+
+          <div>Sell Currency</div>
+          <div>View Statistics</div>
+      </div>
+
+      <div className={styles.right}>
+          { 
+            !user ?
+            (<Link to="/authentification" className={styles.btn}>Login</Link>) : 
+            (<button onClick={logout} className={styles.btn}>Logout</button>)
+          }
+      </div>
+    </div>
     </>
   );
 }

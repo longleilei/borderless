@@ -59,7 +59,7 @@ const Wallet = () => {
                         <div>Your Wallet</div>
                         <div>HK${money}</div>
 
-                        <button onClick={handleInputAmount}>Topup</button>
+                        <button onClick={handleInputAmount}>Deposit</button>
 
                         {
                             showInput &&

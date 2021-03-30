@@ -62,21 +62,22 @@ function App () {
         {alertMessage}
       </Alert>
     
-    <Header/>
+      <WalletPicker onEnable={setEnabled} />
+
+      
+
+      {/* {!enabled &&<Advertpage/>}
+      {!enabled && <Auth onEnable={setEnabled}/>} */}
+      {/* {!enabled && <WalletPicker onEnable={setEnabled} />} */}
+      
 
       <Switch>
           <Route  exact path="/" component={Advertpage}/>
-          <Route  exact path="/wallet" component={Wallet}/>
-          <Route  exact path="/authentification" component={Auth}/> 
-          <Route  exact path="/walletpicker" onEnable={setEnabled} component={WalletPicker}/> 
-          <Route  exact path="/home" onEnable={setEnabled} component={Home}/> 
+          <Route  exact path="/wallet" component={Wallet} onEnable={setEnabled}/>
+          <Route  exact path="/authentification" component={Auth}/>  
+          <Route  exact path="/home">{enabled && <Home onEnable={setEnabled}/>} </Route> 
       </Switch>  
-
-      {/* {!enabled &&<Advertpage/>}
-      {!enabled && <Auth onEnable={setEnabled}/>}
-      {enabled && <WalletPicker onEnable={setEnabled} />}
-      {enabled && <Home />} */}
-      {enabled && <Home />}
+      
     </div>
   </BrowserRouter>
   );

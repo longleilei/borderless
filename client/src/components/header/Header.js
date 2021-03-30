@@ -7,31 +7,30 @@ import { selectWalletMethod } from '../../selectors/setupSelector';
 import { selectModalState } from '../../selectors/uiSelector';
 import { openModal } from '../../actions/uiAction';
 
-
+import WrongNetworkModal from '../../containers/modals/wrongnetwork/WrongNetworkModal';  
 import * as styles from './Header.module.scss';
-import Wallet from '../../containers/wallet/Wallet'; 
 import config from '../../util/config'; 
 
 
-const Header = ({ onEnable }) => {
+
+function Header ({ onEnable }) {
     const history = useHistory(); 
     const location = useLocation();
     const dispatch = useDispatch();
-    const dropdownNode = useRef(null);
 
     const [ user, setUser ] = useState(JSON.parse(localStorage.getItem('profile')));
-    const [ enabled, setEnabled ] = useState(false);
     const [ walletEnabled, setWalletEnabled ] = useState(false);
     const [ accountsEnabled, setAccountsEnabled ] = useState(false);
     const [ wrongNetwork, setWrongNetwork ] = useState(false);
-    const [ showAlternateNetworks, setShowAlternateNetworks ] = useState(false);
+    //const [ showAlternateNetworks, setShowAlternateNetworks ] = useState(false);
+
   
     const walletMethod = useSelector(selectWalletMethod());
     const wrongNetworkModalState = useSelector(selectModalState('wrongNetworkModal'));
 
     
     const dispatchSetWalletMethod = useCallback((methodName) => {
-        dispatch(setWalletMethod(methodName));
+      dispatch(setWalletMethod(methodName));
     }, [ dispatch ]);
 
     const logout = () => {
@@ -129,13 +128,28 @@ const Header = ({ onEnable }) => {
 
     }, [location]); 
 
+    function resetSelection () {
+      dispatchSetWalletMethod(null);
+      setWalletEnabled(false);
+      setAccountsEnabled(false);
+    }
+  
+
     const browserEnabled = !!window.ethereum;
     const walletConnectEnabled = !!config.rpcProxy;
+    const walletLinkEnabled = !!config.rpcProxy;
+  // const ledgerEnabled = !!config.rpcProxy;
 
     
 
     return (
+
         <div className={styles.Header}>
+
+        <WrongNetworkModal
+          open={wrongNetworkModalState}
+          onClose={resetSelection}
+        />
 
             <div className={styles.left}>
                 <div>Borderless</div>
