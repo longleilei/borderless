@@ -12,18 +12,18 @@ const Advertpage = () => {
                 <div className={styles.leftContainer}>
                     <div class="services-container">
 
-                        <div class="service-element">
-                            <div class="checkbox"></div>
+                        <div className={styles.serviceElement}>
+                            <div className={styles.checkbox}></div>
                             <div class="caption">Sell Currency Quickly</div>
                         </div>
 
-                        <div class="service-element">
-                            <div class="checkbox"></div>
+                        <div className={styles.serviceElement}>
+                            <div className={styles.checkbox}></div>
                             <div class="caption">Pay Abroad</div>
                         </div>
 
-                        <div class="service-element">
-                            <div class="checkbox"></div>
+                        <div className={styles.serviceElement}>
+                            <div className={styles.checkbox}></div>
                             <div class="caption">View Currencies</div>
                         </div>
 

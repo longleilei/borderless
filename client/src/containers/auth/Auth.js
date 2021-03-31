@@ -3,7 +3,8 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom'; 
 
 import * as styles from './Auth.module.scss';
-import { signin, signup } from '../../actions/auth'; 
+import { signin, signup } from '../../actions/auth';
+import Button from "../../components/button/Button";
 
 const initialFormData = { username: '', password: '', email: '', confirmPassword: ''}; 
 
@@ -25,11 +26,11 @@ const Auth = () => {
         if(isSignup){
             console.log(formData); 
             dispatch(signup(formData, history)); 
-            console.log('dispatched'); 
+            console.log('signup dispatched');
         } else {
             console.log(formData); 
             dispatch(signin(formData, history)); 
-            console.log('dispatched'); 
+            console.log('signin dispatched');
         }
     }
 
@@ -42,7 +43,7 @@ const Auth = () => {
         <>
             <div className={styles.CircleContainer}>
                 <div className={styles.ContentContainer}>
-                    <form onSubmit={handleSubmit}>
+                    <form >
                         { isSignup && (
                             <>
                                 <label>
@@ -52,7 +53,7 @@ const Auth = () => {
                             </>
                         ) }
                         <label>
-                            Username: 
+                            Username:
                             <input type="text" name="username" onChange={handleChange} />
                         </label>
 
@@ -69,12 +70,17 @@ const Auth = () => {
                                 </label>
                             </>
                         ) }
-
-                        <button className={styles.submitButton}>{isSignup ? 'Signup' : 'Signin'}</button> 
+                        <Button type={'primary'} style={{marginTop: '10px'}} onClick={handleSubmit}>
+                            {isSignup ? 'Signup' : 'Signin'}
+                        </Button>
+                        {/*<button className={styles.submitButton}>{isSignup ? 'Signup' : 'Signin'}</button> */}
 
                     </form>
-                    <button onClick={switchMode}>
-                            { isSignup ? "Already have an account? Sign in" : "Don't have an account? Sign up"}
+                    <button onClick={switchMode} style={{outline: 'none'}}>
+                            { isSignup ?
+                                <span>Already have an account? <span style={{color: '#0ebf9a'}}>Sign in</span></span>
+                                : <span>Don't have an account? <span style={{color: '#0ebf9a'}}>Sign up</span></span>
+                            }
                         </button>
                 </div>
             </div>

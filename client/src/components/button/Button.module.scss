@@ -10,13 +10,15 @@
   cursor: pointer;
   transition: all 200ms ease-in-out;
   min-width: 150px;
+  border-radius: 2rem;
+  margin-bottom: 0.5rem;
   @include mobile {
     min-width: 100px;
   }
 }
 
 .primary {
-  background-color: $blue;
+  background-color: $green;
 }
 
 .secondary {
@@ -24,7 +26,12 @@
 }
 
 .outline {
-  border: 2px solid $gray4;
+  border: 2px solid $gray6;
+}
+
+.warning {
+  background-color: #ff6868;
+  margin-bottom: 0!important;
 }
 
 .disabled {

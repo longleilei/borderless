@@ -54,10 +54,11 @@ a {
 body {
   margin: 0;
   padding: 0;
-  color: $gray5;
-  background-color: $gray1;
+  color: $gray6;
+  background-color: $green;
   font-family: 'MessinaMono', monospace;
   font-size: 14px;
+  box-sizing: border-box;
 }
 
 input {

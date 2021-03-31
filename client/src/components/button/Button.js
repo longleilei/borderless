@@ -38,6 +38,7 @@ function Button ({
         type === 'primary' ? styles.primary : '',
         type === 'secondary' ? styles.secondary : '',
         type === 'outline' ? styles.outline : '',
+          type === 'warning' ? styles.warning : '',
         loading ? styles.disabled : '',
         disabled ? styles.disabled : '',
         className

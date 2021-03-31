@@ -2,6 +2,7 @@ import React,  { useState } from 'react';
 import StripeCheckout from 'react-stripe-checkout'; 
 
 import * as styles from './Wallet.module.scss';
+import Button from '../../components/button/Button';
 
 const Wallet = () => {
 
@@ -56,18 +57,17 @@ const Wallet = () => {
                     <div className={styles.userGreeting}>Welcome back, Nina</div>
 
                     <div className={styles.mainInfo}>
-                        <div>Your Wallet</div>
+                        <div>Your Balance</div>
                         <div>HK${money}</div>
-
-                        <button onClick={handleInputAmount}>Deposit</button>
-
                         {
                             showInput &&
                             (<label>
                                 <input name="amount" placeholder="input amount"onChange={handleInputChange}></input>
-                            </label>) 
+                            </label>)
                         }
-
+                        <Button type={'primary'} onClick={handleInputAmount}>
+                            Deposit
+                        </Button>
                         <StripeCheckout 
                             stripeKey="pk_test_51IItKuK4WEietHlO7wVGqPOPYvMki3sDcmrrrHMVeVQ3xhD8tRCEuRBSzJOTAmgjgEKNWNDv1yBaxge0OmeGR02200Q5W1OTn7"
                             amount={topUp.amount * 100 }
@@ -75,9 +75,9 @@ const Wallet = () => {
                             name="Topup"
                             panelLabel='TOPUP'
                         >
-                        
-                            <button>Confirm</button>
-
+                            <Button type={'secondary'}>
+                                Confirm
+                            </Button>
                         </StripeCheckout>
                     </div>
 

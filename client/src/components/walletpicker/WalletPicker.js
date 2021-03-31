@@ -25,6 +25,8 @@ import { openModal } from 'actions/uiAction';
 import { setWalletMethod } from 'actions/setupAction';
 import { getShortNetworkName, getAlternateNetworks } from 'util/networkName';
 import config from 'util/config';
+import Button from '../../components/button/Button';
+import Hamburger from "../hamburger/Hamburger";
 
 import * as styles from './WalletPicker.module.scss';
 
@@ -39,6 +41,7 @@ function WalletPicker ({ onEnable }) {
   const [ accountsEnabled, setAccountsEnabled ] = useState(false);
   const [ wrongNetwork, setWrongNetwork ] = useState(false);
   const [ showAlternateNetworks, setShowAlternateNetworks ] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
   const walletMethod = useSelector(selectWalletMethod());
   const wrongNetworkModalState = useSelector(selectModalState('wrongNetworkModal'));
@@ -148,6 +151,11 @@ function WalletPicker ({ onEnable }) {
     setAccountsEnabled(false);
   }
 
+  function toLogin() {
+    history.push('/authentification');
+    {/*<Link to="/authentification" className={styles.btn}>Login</Link>*/}
+  }
+
   const browserEnabled = !!window.ethereum;
   const walletConnectEnabled = !!config.rpcProxy;
   const walletLinkEnabled = !!config.rpcProxy;
@@ -160,23 +168,38 @@ function WalletPicker ({ onEnable }) {
     <div className={styles.WalletPicker}>
     
       <div className={styles.left}>
-            <div>Borderless</div>
+            <div>
+              <Link to="/">
+                <strong>Borderless</strong>
+              </Link>
+            </div>
       </div>
+      {/*<div className={styles.middle}>*/}
+      {/*    <div><Link to="/wallet">Wallet</Link></div>*/}
 
-      <div className={styles.middle}>
-          <div><Link to="/wallet">Wallet</Link></div>
+      {/*    <div onClick={() => dispatchSetWalletMethod('browser')}> <Link to="/home">Transfer</Link></div>*/}
 
-          <div onClick={() => dispatchSetWalletMethod('browser')}> <Link to="/home">Transfer</Link></div>
-
-          <div>Sell Currency</div>
-          <div>View Statistics</div>
-      </div>
-
+      {/*    <div>Sell Currency</div>*/}
+      {/*    <div>View Statistics</div>*/}
+      {/*</div>*/}
       <div className={styles.right}>
+        <Hamburger isOpen={isOpen} hamburgerClick={() => {setOpen(!isOpen)}} className={'Ham'}>
+          {
+            isOpen &&
+            (<div className={styles.hamburgerMenu}>
+              <div><Link to="/wallet">Wallet</Link></div>
+              <div onClick={() => dispatchSetWalletMethod('browser')}> <Link to="/home">Transfer</Link></div>
+              <div>Sell Currency</div>
+              <div>View Statistics</div>
+            </div>)
+          }
+        </Hamburger>
+
           { 
             !user ?
-            (<Link to="/authentification" className={styles.btn}>Login</Link>) : 
-            (<button onClick={logout} className={styles.btn}>Logout</button>)
+            (<Button type={'outline'} onClick={toLogin}>Login</Button>)
+                :
+                (<Button type={'warning'} onClick={logout}  className={styles.btn}>Logout</Button>)
           }
       </div>
     </div>

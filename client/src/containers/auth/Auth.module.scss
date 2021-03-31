@@ -1,11 +1,10 @@
 .CircleContainer {
-        
-        height: 600px;
+        height: 500px;
         width: 600px;
-        background: grey;
-        border-radius: 300px;
+        background: #fff;
+        border-radius: 20px;
         display: inline-block; 
-        margin: auto; 
+        margin: 8rem auto 1rem;
 
         .ContentContainer {
             display: flex;
@@ -20,16 +19,24 @@
                 display: flex; 
                 flex-direction: row; 
                 justify-content: flex-end;
+                align-items: center;
                 width: 100%;  
                 text-align: right; 
                 line-height: 20px; 
-                margin: auto; 
+                margin: 10px auto;
+                color: #0ebf9a;
 
                 input {
+                    border-radius: 3px;
                     height: 30px; 
                     flex: 0 0 200px; 
-                    margin: 0 0 20px 10px; 
-                }   
+                    //margin: 0 0 20px 10px;
+                    color: #0ebf9a;
+                    border-bottom: 1px solid #0ebf9a;
+                }
+              &:last-child {
+                margin-bottom: 20px;
+              }
             }
             .submitButton{
                 margin-left: 90px; 
@@ -42,7 +49,10 @@
                 background: none;
                 text-transform: uppercase;
             }
-            
+          .switch-btn {
+            outline: none;
+          }
 
         }
+
 }
