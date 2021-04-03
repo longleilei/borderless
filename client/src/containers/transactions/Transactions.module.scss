@@ -1,0 +1,92 @@
+@import 'index.scss';
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  h2 {
+    flex: 1;
+    margin-bottom: 0;
+  }
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  @include mobile {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.data {
+  display: flex;
+  flex-direction: row;
+  @include mobile {
+    flex-direction: column;
+  }
+}
+
+.section {
+  flex: 1;
+  &:first-child {
+    margin-right: 20px;
+    @include mobile {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.transactionSection {
+  margin-bottom: 20px;
+}
+
+.disclaimer {
+  color: $gray3;
+  margin-bottom: 20px;
+}
+
+.searchBar {
+  flex: 1;
+  margin-bottom: 0;
+  & > div {
+    border: none !important;
+    border-bottom: 2px solid $gray3 !important;
+  }
+  input {
+    background-color: $gray1 !important;
+  }
+}
+
+.transactions {
+  height: 100%;
+  overflow: auto;
+
+  .transaction {
+    border-bottom: 1px dashed $gray3;
+    padding: 20px 0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.subTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 32px;
+  span {
+    margin-right: 20px;
+  }
+}
+
+.processExitButton {
+  color: $blue;
+  cursor: pointer;
+}

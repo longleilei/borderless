@@ -1,0 +1,40 @@
+@import 'index.scss';
+
+.Home {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+  max-height: 100vh;
+
+  @include mobile {
+    flex-direction: column;
+    max-height: initial;
+  }
+
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    background-color: $gray2;
+    align-items: flex-start;
+
+    .logo {
+      width: 130px;
+      padding: 50px 0px 10px 40px;
+    }
+
+    @include mobile {
+      display: none;
+    }
+  }
+
+  .main {
+    padding: 40px;
+    background-color: $gray1;
+    flex: 1;
+    overflow: auto;
+    position: relative;
+    @include mobile {
+      padding: 15px;
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@import 'index.scss';
+
+.Button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: $gray6;
+  padding: 15px;
+  flex: 1;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  min-width: 150px;
+  border-radius: 2rem;
+  margin-bottom: 0.5rem;
+  @include mobile {
+    min-width: 100px;
+  }
+}
+
+.primary {
+  background-color: $green;
+}
+
+.secondary {
+  background-color: $gray4;
+}
+
+.outline {
+  border: 2px solid $gray6;
+}
+
+.warning {
+  background-color: #ff6868;
+  margin-bottom: 0!important;
+}
+
+.disabled {
+  filter: brightness(50%);
+  cursor: initial;
+}
+
+.loading {
+  margin: 0 -20px 0 10px !important;
+}

@@ -1,0 +1,30 @@
+@import 'index.scss';
+
+.Pager {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+
+  .number {
+    font-size: 0.8em;
+    margin-right: 10px;
+  }
+
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 20px;
+    margin-left: 3px;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+  }
+
+  .disabled {
+    pointer-events: none;
+    cursor: initial;
+    opacity: 0.5;
+  }
+}

@@ -1,0 +1,17 @@
+@import 'index.scss';
+
+.MobileHeader {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: $gray1;
+  align-items: center;
+  margin-bottom: 15px;
+
+  @include mobile {
+    display: flex;
+  }
+  .logo {
+    height: 30px;
+  }
+}

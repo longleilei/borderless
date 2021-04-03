@@ -1,0 +1,20 @@
+
+.Header{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between; 
+    margin: 0 2rem 0 2rem; 
+    padding: 5rem; 
+    font-size: 20px;
+    .middle{
+        width: 700px; 
+        display:flex; 
+        flex-direction: row;
+        justify-content: space-between; 
+    }
+
+    .btn{
+        width: 100px; 
+        height: 35px; 
+    }
+}
