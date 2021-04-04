@@ -36,7 +36,7 @@ import {
     checkPendingExitStatus,
 } from "actions/networkAction";
 
-import DepositModal from "containers/modals/deposit/DepositModal";
+import HKDDepositModal from "containers/modals/deposit/HKDDepositModal";
 import HKDTransferModal from "containers/modals/transfer/HKDTransferModal";
 import ExitModal from "containers/modals/exit/ExitModal";
 import MergeModal from "containers/modals/merge/MergeModal";
@@ -118,7 +118,7 @@ function HKDHome() {
 
     return (
         <>
-            <DepositModal open={depositModalState} />
+            <HKDDepositModal open={depositModalState} />
             <HKDTransferModal open={transferModalState} />
             <ExitModal open={exitModalState} />
             <MergeModal open={mergeModalState} />

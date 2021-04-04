@@ -36,7 +36,7 @@ import {
     checkPendingExitStatus,
 } from "actions/networkAction";
 
-import DepositModal from "containers/modals/deposit/DepositModal";
+import EURODepositModal from "containers/modals/deposit/EURODepositModal";
 import EUROTransferModal from "containers/modals/transfer/EUROTransferModal";
 import ExitModal from "containers/modals/exit/ExitModal";
 import MergeModal from "containers/modals/merge/MergeModal";
@@ -118,7 +118,7 @@ function EUROHome() {
 
     return (
         <>
-            <DepositModal open={depositModalState} />
+            <EURODepositModal open={depositModalState} />
             <EUROTransferModal open={transferModalState} />
             <ExitModal open={exitModalState} />
             <MergeModal open={mergeModalState} />
