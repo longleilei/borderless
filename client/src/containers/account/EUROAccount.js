@@ -135,7 +135,7 @@ function EUROAccount() {
                             type="secondary"
                             disabled={disabled}
                         >
-                            EXIT
+                            WITHDRAW
                         </Button>
                     </div>
                 </div>

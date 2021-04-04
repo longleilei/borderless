@@ -155,10 +155,10 @@ function Header({ onEnable }) {
                 </div>
 
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/home">Swap for EURO</Link>
+                    <Link to="/home">HKD Wallet</Link>
                 </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/eurohome">Swap for HKD</Link>
+                    <Link to="/eurohome">EURO Wallet</Link>
                 </div>
 
                 <div>Sell Currency</div>

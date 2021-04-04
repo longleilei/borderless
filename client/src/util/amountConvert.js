@@ -14,20 +14,20 @@ See the License for the specific language governing permissions and
 limitations under the License. */
 
 // we use BigNumber here for decimal support
-import BigNumber from 'bignumber.js';
+import BigNumber from "bignumber.js";
 
-export function logAmount (amount, power) {
-  const x = new BigNumber(amount);
-  const exp = new BigNumber(10).pow(power);
+export function logAmount(amount, power) {
+    const x = new BigNumber(amount);
+    const exp = new BigNumber(10).pow(power);
 
-  const calculated = x.div(exp);
-  return calculated.toFixed();
+    const calculated = x.div(exp);
+    return calculated.toFixed(2);
 }
 
-export function powAmount (amount, power) {
-  const x = new BigNumber(amount);
-  const exp = new BigNumber(10).pow(power);
+export function powAmount(amount, power) {
+    const x = new BigNumber(amount);
+    const exp = new BigNumber(10).pow(power);
 
-  const calculated = x.multipliedBy(exp);
-  return calculated.toFixed(0);
+    const calculated = x.multipliedBy(exp);
+    return calculated.toFixed(0);
 }

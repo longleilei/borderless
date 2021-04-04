@@ -135,7 +135,7 @@ function HKDAccount() {
                             type="secondary"
                             disabled={disabled}
                         >
-                            EXIT
+                            WITHDRAW
                         </Button>
                     </div>
                 </div>

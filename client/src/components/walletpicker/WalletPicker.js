@@ -183,10 +183,10 @@ function WalletPicker({ onEnable }) {
                     </div>
                 </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/hkdhome">Swap for EURO</Link>
+                    <Link to="/hkdhome">HKD Wallet</Link>
                 </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/eurohome">Swap for HKD</Link>
+                    <Link to="/eurohome">EURO Wallet</Link>
                 </div>
                 <div className={styles.right}>
                     <Hamburger

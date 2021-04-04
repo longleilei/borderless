@@ -37,7 +37,7 @@ import {
 } from "actions/networkAction";
 
 import DepositModal from "containers/modals/deposit/DepositModal";
-import TransferModal from "containers/modals/transfer/TransferModal";
+import EUROTransferModal from "containers/modals/transfer/EUROTransferModal";
 import ExitModal from "containers/modals/exit/ExitModal";
 import MergeModal from "containers/modals/merge/MergeModal";
 import LedgerConnect from "containers/modals/ledger/LedgerConnect";
@@ -119,7 +119,7 @@ function EUROHome() {
     return (
         <>
             <DepositModal open={depositModalState} />
-            <TransferModal open={transferModalState} />
+            <EUROTransferModal open={transferModalState} />
             <ExitModal open={exitModalState} />
             <MergeModal open={mergeModalState} />
             <LedgerConnect
