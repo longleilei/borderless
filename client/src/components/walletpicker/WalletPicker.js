@@ -183,10 +183,10 @@ function WalletPicker({ onEnable }) {
                     </div>
                 </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/hkdhome">HKD Wallet</Link>
+                    <Link to="/eurohome">EURO Wallet</Link>
                 </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/eurohome">EURO Wallet</Link>
+                    <Link to="/hkdhome">HKD Wallet</Link>
                 </div>
                 <div className={styles.right}>
                     <Hamburger
@@ -198,22 +198,22 @@ function WalletPicker({ onEnable }) {
                     >
                         {isOpen && (
                             <div className={styles.hamburgerMenu}>
-                                <div>
+                                {/* <div>
                                     <Link to="/wallet">Wallet</Link>
+                                </div> */}
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Link to="/hkdhome">HKD Wallet</Link>
                                 </div>
                                 <div
                                     onClick={() =>
                                         dispatchSetWalletMethod("browser")
                                     }
                                 >
-                                    <Link to="/hkdhome">Swap for EURO</Link>
-                                </div>
-                                <div
-                                    onClick={() =>
-                                        dispatchSetWalletMethod("browser")
-                                    }
-                                >
-                                    <Link to="/eurohome">Swap for HKD</Link>
+                                    <Link to="/eurohome">EURO Wallet</Link>
                                 </div>
                                 {/* <div>Sell Currency</div>
                                 <div>View Statistics</div> */}
