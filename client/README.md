@@ -5,8 +5,8 @@
 This is an example client side wallet built with React.js which allows you to make interactions with the OMG network from the browser.
 To run this application locally, make sure you have a local instance of elixir-omg running or have access to an already deployed network.
 
-- This example application is using [`omg-js`](https://github.com/omgnetwork/omg-js)
-- Requires Node 12.16.1
+-   This example application is using [`omg-js`](https://github.com/omgnetwork/omg-js)
+-   Requires Node 12.16.1
 
 ## Initial Setup
 
@@ -17,7 +17,7 @@ To run this application locally, make sure you have a local instance of elixir-o
 ```env
 REACT_APP_WATCHER_URL=        the watcher url
 REACT_APP_PLASMA_ADDRESS=     the plasma framework address
-REACT_APP_BLOCKEXPLORER_URL=  the block explorer url 
+REACT_APP_BLOCKEXPLORER_URL=  the block explorer url
 REACT_APP_ETHERSCAN_URL=      the etherscan url (https://etherscan.io, etc.)
 REACT_APP_SYNC_INTERVAL=      max number of blocks that watcher has to sync to the child chain before allowing further transactions
 REACT_APP_POLL_INTERVAL=      number of seconds to poll account data
@@ -34,13 +34,13 @@ REACT_APP_RPC_PROXY=          *optional, required for WalletConnect support* rpc
 
 ## Running the wallet locally
 
-Open up your browser and navigate to `http://localhost:3000`. 
+Open up your browser and navigate to `http://localhost:3000`.
 
 From here, you can perform these actions:
 
-1. Deposit into the OMG Network.
+1. Deposit into the Borderless Network.
 
-2. Transfer funds on the OMG Network.
+2. Transfer funds on the Borderless Network.
 
 3. Exit your funds back to the Rootchain.
 
