@@ -219,6 +219,38 @@ function WalletPicker({ onEnable }) {
                                     <Flag name="eu" />
                                     <Link to="/eurohome">EURO Wallet</Link>
                                 </div>
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Flag name="cn" />
+                                    <Link to="/rmbhome">RMB Wallet</Link>
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Flag name="th" />
+                                    <Link to="/thbhome">THB Wallet</Link>
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Flag name="us" />
+                                    <Link to="/usdhome">USD Wallet</Link>
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Flag name="sg" />
+                                    <Link to="/sgdhome">SGD Wallet</Link>
+                                </div>
                                 {/* <div>Sell Currency</div>
                                 <div>View Statistics</div> */}
                             </div>

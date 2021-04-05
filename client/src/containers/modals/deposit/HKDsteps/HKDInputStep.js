@@ -39,7 +39,7 @@ function HKDInputStep({
 
     async function depositETH() {
         if (value > 0 && tokenInfo) {
-            const amount = powAmount(value / 15000, tokenInfo.decimals);
+            const amount = powAmount(value / 16212, tokenInfo.decimals);
             const res = await dispatch(depositEth(amount, gasPrice));
             if (res) {
                 dispatch(setActiveHistoryTab("Deposits"));

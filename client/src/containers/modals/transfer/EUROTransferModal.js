@@ -122,7 +122,7 @@ function EUROTransferModal({ open }) {
     const selectOptions = balances.map((i) => ({
         title: "EUR",
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * 1764, i.decimals)}`,
+        subTitle: `Balance: ${logAmount(i.amount * 1769, i.decimals)}`,
     }));
 
     async function submit({ useLedgerSign }) {
@@ -133,7 +133,7 @@ function EUROTransferModal({ open }) {
                     getTransferTypedData({
                         utxos: [...selectedUtxos, ...selectedFeeUtxos],
                         recipient,
-                        value: powAmount(value / 1764, valueTokenInfo.decimals),
+                        value: powAmount(value / 1769, valueTokenInfo.decimals),
                         currency,
                         feeToken,
                         metadata,
@@ -180,7 +180,7 @@ function EUROTransferModal({ open }) {
         !currency ||
         !feeToken ||
         !recipient ||
-        new BN(value).gt(new BN(getMaxTransferValue() * 1764));
+        new BN(value).gt(new BN(getMaxTransferValue() * 1769));
 
     function getMaxTransferValue() {
         const transferingBalanceObject = balances.find(
@@ -492,7 +492,7 @@ function EUROTransferModal({ open }) {
                         setSelectedFeeUtxos([]);
                     }}
                     selectValue={currency}
-                    maxValue={getMaxTransferValue() * 1764}
+                    maxValue={getMaxTransferValue() * 1769}
                     flag="eu"
                 />
 

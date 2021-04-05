@@ -43,7 +43,7 @@ import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
 
 import * as styles from "./TransferModal.module.scss";
 
-function HKDTransferModal({ open }) {
+function RMBTransferModal({ open }) {
     const dispatch = useDispatch();
 
     const [currency, setCurrency] = useState("");
@@ -120,9 +120,9 @@ function HKDTransferModal({ open }) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: "HKD",
+        title: "RMB",
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * 16212, i.decimals)}`,
+        subTitle: `Balance: ${logAmount(i.amount * 13834, i.decimals)}`,
     }));
 
     async function submit({ useLedgerSign }) {
@@ -134,7 +134,7 @@ function HKDTransferModal({ open }) {
                         utxos: [...selectedUtxos, ...selectedFeeUtxos],
                         recipient,
                         value: powAmount(
-                            value / 16212,
+                            value / 13834,
                             valueTokenInfo.decimals
                         ),
                         currency,
@@ -183,7 +183,7 @@ function HKDTransferModal({ open }) {
         !currency ||
         !feeToken ||
         !recipient ||
-        new BN(value).gt(new BN(getMaxTransferValue() * 16212));
+        new BN(value).gt(new BN(getMaxTransferValue() * 13834));
 
     function getMaxTransferValue() {
         const transferingBalanceObject = balances.find(
@@ -495,8 +495,8 @@ function HKDTransferModal({ open }) {
                         setSelectedFeeUtxos([]);
                     }}
                     selectValue={currency}
-                    maxValue={getMaxTransferValue() * 16212}
-                    flag="hk"
+                    maxValue={getMaxTransferValue() * 13834}
+                    flag="cn"
                 />
 
                 {value > 0 && (
@@ -574,4 +574,4 @@ function HKDTransferModal({ open }) {
     );
 }
 
-export default React.memo(HKDTransferModal);
+export default React.memo(RMBTransferModal);

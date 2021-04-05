@@ -22,6 +22,10 @@ import { selectAlert, selectError } from "selectors/uiSelector";
 
 import HKDHome from "containers/home/HKDHome";
 import EUROHome from "containers/home/EUROHome";
+import RMBHome from "containers/home/RMBHome";
+import THBHome from "containers/home/THBHome";
+import USDHome from "containers/home/USDHome";
+import SGDHome from "containers/home/SGDHome";
 import Header from "../../components/header/Header";
 import Advertpage from "containers/advertpage/Advertpage";
 import Auth from "containers/auth/Auth";
@@ -82,6 +86,18 @@ function App() {
                     </Route>
                     <Route exact path="/eurohome">
                         {enabled && <EUROHome onEnable={setEnabled} />}{" "}
+                    </Route>
+                    <Route exact path="/rmbhome">
+                        {enabled && <RMBHome onEnable={setEnabled} />}{" "}
+                    </Route>
+                    <Route exact path="/thbhome">
+                        {enabled && <THBHome onEnable={setEnabled} />}{" "}
+                    </Route>
+                    <Route exact path="/usdhome">
+                        {enabled && <USDHome onEnable={setEnabled} />}{" "}
+                    </Route>
+                    <Route exact path="/sgdhome">
+                        {enabled && <SGDHome onEnable={setEnabled} />}{" "}
                     </Route>
                 </Switch>
             </div>

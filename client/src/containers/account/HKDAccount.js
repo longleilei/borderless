@@ -133,7 +133,7 @@ function HKDAccount() {
                                 </div>
                                 <span>
                                     HK${" "}
-                                    {logAmount(i.amount * 15000, i.decimals)}
+                                    {logAmount(i.amount * 16212, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
@@ -174,7 +174,7 @@ function HKDAccount() {
                                 </div>
                                 <span>
                                     HK${" "}
-                                    {logAmount(i.amount * 15000, i.decimals)}
+                                    {logAmount(i.amount * 16212, i.decimals)}
                                 </span>
                             </div>
                         ) : null;

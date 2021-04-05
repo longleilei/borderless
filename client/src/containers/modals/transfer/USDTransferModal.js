@@ -43,7 +43,7 @@ import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
 
 import * as styles from "./TransferModal.module.scss";
 
-function HKDTransferModal({ open }) {
+function USDTransferModal({ open }) {
     const dispatch = useDispatch();
 
     const [currency, setCurrency] = useState("");
@@ -120,9 +120,9 @@ function HKDTransferModal({ open }) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: "HKD",
+        title: "USD",
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * 16212, i.decimals)}`,
+        subTitle: `Balance: ${logAmount(i.amount * 2106, i.decimals)}`,
     }));
 
     async function submit({ useLedgerSign }) {
@@ -133,10 +133,7 @@ function HKDTransferModal({ open }) {
                     getTransferTypedData({
                         utxos: [...selectedUtxos, ...selectedFeeUtxos],
                         recipient,
-                        value: powAmount(
-                            value / 16212,
-                            valueTokenInfo.decimals
-                        ),
+                        value: powAmount(value / 2106, valueTokenInfo.decimals),
                         currency,
                         feeToken,
                         metadata,
@@ -183,7 +180,7 @@ function HKDTransferModal({ open }) {
         !currency ||
         !feeToken ||
         !recipient ||
-        new BN(value).gt(new BN(getMaxTransferValue() * 16212));
+        new BN(value).gt(new BN(getMaxTransferValue() * 2106));
 
     function getMaxTransferValue() {
         const transferingBalanceObject = balances.find(
@@ -495,8 +492,8 @@ function HKDTransferModal({ open }) {
                         setSelectedFeeUtxos([]);
                     }}
                     selectValue={currency}
-                    maxValue={getMaxTransferValue() * 16212}
-                    flag="hk"
+                    maxValue={getMaxTransferValue() * 2106}
+                    flag="us"
                 />
 
                 {value > 0 && (
@@ -574,4 +571,4 @@ function HKDTransferModal({ open }) {
     );
 }
 
-export default React.memo(HKDTransferModal);
+export default React.memo(USDTransferModal);

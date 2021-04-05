@@ -36,9 +36,13 @@ import { logAmount } from "util/amountConvert";
 
 import networkService from "services/networkService";
 
+import { Grid } from "semantic-ui-react";
+import CurrencyDropdown from "../selectCurrency/CurrencyDropdown";
+
+import "semantic-ui-css/semantic.min.css";
 import * as styles from "./Account.module.scss";
 
-function EUROAccount() {
+function SGDAccount() {
     const dispatch = useDispatch();
     const isSynced = useSelector(selectIsSynced);
     const childBalance = useSelector(selectChildchainBalance, isEqual);
@@ -67,6 +71,17 @@ function EUROAccount() {
     return (
         <div className={styles.Account}>
             <h2>Hello</h2>
+            {/* <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column>
+                        <h2>Hello</h2>
+                    </Grid.Column>
+                    <Grid.Column textAlign="right">
+                        <CurrencyDropdown />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid> */}
+
             <div className={styles.wallet}>
                 <span className={styles.address}></span>
                 <Copy value={networkService.account} />
@@ -113,11 +128,11 @@ function EUROAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"EUR"}
+                                        {"SGD"}
                                     </span>
                                 </div>
                                 <span>
-                                    € {logAmount(i.amount * 1769, i.decimals)}
+                                    S$ {logAmount(i.amount * 2801, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
@@ -153,11 +168,11 @@ function EUROAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"EUR"}
+                                        {"SGD"}
                                     </span>
                                 </div>
                                 <span>
-                                    € {logAmount(i.amount * 1769, i.decimals)}
+                                    S$ {logAmount(i.amount * 2801, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
@@ -168,4 +183,4 @@ function EUROAccount() {
     );
 }
 
-export default React.memo(EUROAccount);
+export default React.memo(SGDAccount);

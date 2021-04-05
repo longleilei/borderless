@@ -16,7 +16,7 @@ import * as styles from "../DepositModal.module.scss";
 
 const ETH = networkService.OmgUtil.transaction.ETH_CURRENCY;
 
-function EUROInputStep({
+function RMBInputStep({
     onClose,
     onNext,
     currency,
@@ -27,7 +27,7 @@ function EUROInputStep({
     setValue,
 }) {
     const dispatch = useDispatch();
-    const [activeTab, setActiveTab] = useState("EUR");
+    const [activeTab, setActiveTab] = useState("RMB");
     const depositLoading = useSelector(selectLoading(["DEPOSIT/CREATE"]));
     const [selectedSpeed, setSelectedSpeed] = useState("normal");
     const [gasPrice, setGasPrice] = useState();
@@ -39,11 +39,11 @@ function EUROInputStep({
 
     async function depositETH() {
         if (value > 0 && tokenInfo) {
-            const amount = powAmount(value / 1769, tokenInfo.decimals);
+            const amount = powAmount(value / 13834, tokenInfo.decimals);
             const res = await dispatch(depositEth(amount, gasPrice));
             if (res) {
                 dispatch(setActiveHistoryTab("Deposits"));
-                dispatch(openAlert("EUR deposit submitted."));
+                dispatch(openAlert("RMB deposit submitted."));
                 handleClose();
             }
         }
@@ -61,11 +61,11 @@ function EUROInputStep({
             <Tabs
                 className={styles.tabs}
                 onClick={(i) => {
-                    i === "EUR" ? setCurrency(ETH) : setCurrency("");
+                    i === "RMB" ? setCurrency(ETH) : setCurrency("");
                     setActiveTab(i);
                 }}
                 activeTab={activeTab}
-                tabs={["EUR", "ERC20"]}
+                tabs={["RMB", "ERC20"]}
             />
 
             {activeTab === "ERC20" && (
@@ -81,13 +81,13 @@ function EUROInputStep({
             <Input
                 label="Amount to deposit into the Borderless Network"
                 type="number"
-                unit={tokenInfo ? "EUR" : ""}
+                unit={tokenInfo ? "RMB" : ""}
                 placeholder={0}
                 value={value}
                 onChange={(i) => setValue(i.target.value)}
             />
 
-            {activeTab === "EUR" && (
+            {activeTab === "RMB" && (
                 <GasPicker
                     selectedSpeed={selectedSpeed}
                     setSelectedSpeed={setSelectedSpeed}
@@ -103,7 +103,7 @@ function EUROInputStep({
                 >
                     CANCEL
                 </Button>
-                {activeTab === "EUR" && (
+                {activeTab === "RMB" && (
                     <Button
                         onClick={depositETH}
                         type="primary"
@@ -130,4 +130,4 @@ function EUROInputStep({
     );
 }
 
-export default React.memo(EUROInputStep);
+export default React.memo(RMBInputStep);
