@@ -38,6 +38,9 @@ import Select from "components/select/Select";
 import networkService from "services/networkService";
 import { logAmount, powAmount } from "util/amountConvert";
 
+import { Grid } from "semantic-ui-react";
+import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
+
 import * as styles from "./TransferModal.module.scss";
 
 function EUROTransferModal({ open }) {
@@ -451,7 +454,16 @@ function EUROTransferModal({ open }) {
     function renderTransferScreen() {
         return (
             <>
-                <h2>Transfer</h2>
+                <Grid columns={2}>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <h2>Transfer</h2>
+                        </Grid.Column>
+                        <Grid.Column textAlign="right">
+                            <CurrencyDropdown />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
                 <div className={styles.address}>
                     {`From address : ${networkService.account}`}
                 </div>
@@ -465,7 +477,7 @@ function EUROTransferModal({ open }) {
                 />
 
                 <InputSelect
-                    label="Amount to transfer"
+                    label="Payment Currency Amount"
                     placeholder={0}
                     value={value}
                     onChange={(i) => {
@@ -481,6 +493,7 @@ function EUROTransferModal({ open }) {
                     }}
                     selectValue={currency}
                     maxValue={getMaxTransferValue() * 1764}
+                    flag="eu"
                 />
 
                 {value > 0 && (
