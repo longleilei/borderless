@@ -36,6 +36,10 @@ import { logAmount } from "util/amountConvert";
 
 import networkService from "services/networkService";
 
+import { Grid } from "semantic-ui-react";
+import CurrencyDropdown from "../selectCurrency/CurrencyDropdown";
+
+import "semantic-ui-css/semantic.min.css";
 import * as styles from "./Account.module.scss";
 
 function HKDAccount() {
@@ -67,6 +71,17 @@ function HKDAccount() {
     return (
         <div className={styles.Account}>
             <h2>Hello</h2>
+            {/* <Grid columns={2}>
+                <Grid.Row>
+                    <Grid.Column>
+                        <h2>Hello</h2>
+                    </Grid.Column>
+                    <Grid.Column textAlign="right">
+                        <CurrencyDropdown />
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid> */}
+
             <div className={styles.wallet}>
                 <span className={styles.address}></span>
                 <Copy value={networkService.account} />
