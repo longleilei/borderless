@@ -79,7 +79,7 @@ function HKDInputStep({
             )}
 
             <Input
-                label="Amount to deposit into the OMG Network"
+                label="Amount to deposit into the Borderless Network"
                 type="number"
                 unit={tokenInfo ? "HKDT" : ""}
                 placeholder={0}

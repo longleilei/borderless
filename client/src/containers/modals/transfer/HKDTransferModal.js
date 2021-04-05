@@ -304,7 +304,7 @@ function HKDTransferModal({ open }) {
                         {!currencyUtxos.length && (
                             <div className={styles.disclaimer}>
                                 You do not have any UTXOs for this token on the
-                                OMG Network.
+                                Borderless Network.
                             </div>
                         )}
                         {currencyUtxos.map((i, index) => {

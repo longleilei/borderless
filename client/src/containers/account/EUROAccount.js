@@ -77,7 +77,7 @@ function EUROAccount() {
                     <div className={styles.header}>
                         <div className={styles.title}>
                             <span>Balance on Childchain</span>
-                            <span>OMG Network</span>
+                            <span>Borderless Network</span>
                         </div>
                         <div className={styles.actions}>
                             <div

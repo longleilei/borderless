@@ -79,7 +79,7 @@ function EUROInputStep({
             )}
 
             <Input
-                label="Amount to deposit into the OMG Network"
+                label="Amount to deposit into the Borderless Network"
                 type="number"
                 unit={tokenInfo ? "EURT" : ""}
                 placeholder={0}
