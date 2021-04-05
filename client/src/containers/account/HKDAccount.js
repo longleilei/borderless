@@ -113,10 +113,11 @@ function HKDAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"HKDT"}
+                                        {"HKD"}
                                     </span>
                                 </div>
                                 <span>
+                                    HK${" "}
                                     {logAmount(i.amount * 15000, i.decimals)}
                                 </span>
                             </div>
@@ -153,10 +154,11 @@ function HKDAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"HKDT"}
+                                        {"HKD"}
                                     </span>
                                 </div>
                                 <span>
+                                    HK${" "}
                                     {logAmount(i.amount * 15000, i.decimals)}
                                 </span>
                             </div>

@@ -27,7 +27,7 @@ function HKDInputStep({
     setValue,
 }) {
     const dispatch = useDispatch();
-    const [activeTab, setActiveTab] = useState("HKDT");
+    const [activeTab, setActiveTab] = useState("HKD");
     const depositLoading = useSelector(selectLoading(["DEPOSIT/CREATE"]));
     const [selectedSpeed, setSelectedSpeed] = useState("normal");
     const [gasPrice, setGasPrice] = useState();
@@ -43,7 +43,7 @@ function HKDInputStep({
             const res = await dispatch(depositEth(amount, gasPrice));
             if (res) {
                 dispatch(setActiveHistoryTab("Deposits"));
-                dispatch(openAlert("HKDT deposit submitted."));
+                dispatch(openAlert("HKD deposit submitted."));
                 handleClose();
             }
         }
@@ -61,11 +61,11 @@ function HKDInputStep({
             <Tabs
                 className={styles.tabs}
                 onClick={(i) => {
-                    i === "HKDT" ? setCurrency(ETH) : setCurrency("");
+                    i === "HKD" ? setCurrency(ETH) : setCurrency("");
                     setActiveTab(i);
                 }}
                 activeTab={activeTab}
-                tabs={["HKDT", "ERC20"]}
+                tabs={["HKD", "ERC20"]}
             />
 
             {activeTab === "ERC20" && (
@@ -81,13 +81,13 @@ function HKDInputStep({
             <Input
                 label="Amount to deposit into the Borderless Network"
                 type="number"
-                unit={tokenInfo ? "HKDT" : ""}
+                unit={tokenInfo ? "HKD" : ""}
                 placeholder={0}
                 value={value}
                 onChange={(i) => setValue(i.target.value)}
             />
 
-            {activeTab === "HKDT" && (
+            {activeTab === "HKD" && (
                 <GasPicker
                     selectedSpeed={selectedSpeed}
                     setSelectedSpeed={setSelectedSpeed}
@@ -103,7 +103,7 @@ function HKDInputStep({
                 >
                     CANCEL
                 </Button>
-                {activeTab === "HKDT" && (
+                {activeTab === "HKD" && (
                     <Button
                         onClick={depositETH}
                         type="primary"

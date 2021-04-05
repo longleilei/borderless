@@ -117,7 +117,7 @@ function HKDTransferModal({ open }) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: "HKDT",
+        title: "HKD",
         value: i.currency,
         subTitle: `Balance: ${logAmount(i.amount * 15000, i.decimals)}`,
     }));

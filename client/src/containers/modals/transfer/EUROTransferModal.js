@@ -117,7 +117,7 @@ function EUROTransferModal({ open }) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: "EURT",
+        title: "EUR",
         value: i.currency,
         subTitle: `Balance: ${logAmount(i.amount * 1764, i.decimals)}`,
     }));

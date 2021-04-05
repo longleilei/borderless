@@ -113,11 +113,11 @@ function EUROAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"EURT"}
+                                        {"EUR"}
                                     </span>
                                 </div>
                                 <span>
-                                    {logAmount(i.amount * 1764, i.decimals)}
+                                    € {logAmount(i.amount * 1764, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
@@ -153,11 +153,11 @@ function EUROAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"EURT"}
+                                        {"EUR"}
                                     </span>
                                 </div>
                                 <span>
-                                    {logAmount(i.amount * 1764, i.decimals)}
+                                    € {logAmount(i.amount * 1764, i.decimals)}
                                 </span>
                             </div>
                         ) : null;

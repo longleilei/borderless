@@ -27,7 +27,7 @@ function EUROInputStep({
     setValue,
 }) {
     const dispatch = useDispatch();
-    const [activeTab, setActiveTab] = useState("EURT");
+    const [activeTab, setActiveTab] = useState("EUR");
     const depositLoading = useSelector(selectLoading(["DEPOSIT/CREATE"]));
     const [selectedSpeed, setSelectedSpeed] = useState("normal");
     const [gasPrice, setGasPrice] = useState();
@@ -43,7 +43,7 @@ function EUROInputStep({
             const res = await dispatch(depositEth(amount, gasPrice));
             if (res) {
                 dispatch(setActiveHistoryTab("Deposits"));
-                dispatch(openAlert("EURT deposit submitted."));
+                dispatch(openAlert("EUR deposit submitted."));
                 handleClose();
             }
         }
@@ -61,11 +61,11 @@ function EUROInputStep({
             <Tabs
                 className={styles.tabs}
                 onClick={(i) => {
-                    i === "EURT" ? setCurrency(ETH) : setCurrency("");
+                    i === "EUR" ? setCurrency(ETH) : setCurrency("");
                     setActiveTab(i);
                 }}
                 activeTab={activeTab}
-                tabs={["EURT", "ERC20"]}
+                tabs={["EUR", "ERC20"]}
             />
 
             {activeTab === "ERC20" && (
@@ -81,13 +81,13 @@ function EUROInputStep({
             <Input
                 label="Amount to deposit into the Borderless Network"
                 type="number"
-                unit={tokenInfo ? "EURT" : ""}
+                unit={tokenInfo ? "EUR" : ""}
                 placeholder={0}
                 value={value}
                 onChange={(i) => setValue(i.target.value)}
             />
 
-            {activeTab === "EURT" && (
+            {activeTab === "EUR" && (
                 <GasPicker
                     selectedSpeed={selectedSpeed}
                     setSelectedSpeed={setSelectedSpeed}
@@ -103,7 +103,7 @@ function EUROInputStep({
                 >
                     CANCEL
                 </Button>
-                {activeTab === "EURT" && (
+                {activeTab === "EUR" && (
                     <Button
                         onClick={depositETH}
                         type="primary"
