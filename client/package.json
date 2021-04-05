@@ -41,6 +41,8 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.4",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-css": "^2.4.1",
+    "semantic-ui-react": "^2.0.3",
     "serve": "^11.3.2",
     "thunk": "0.0.1",
     "truncate-middle": "^1.0.6",
