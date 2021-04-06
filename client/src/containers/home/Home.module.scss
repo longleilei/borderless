@@ -1,40 +1,41 @@
 @import 'index.scss';
 
+::-webkit-scrollbar {
+  width: 0;
+}
 .Home {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  max-height: 100vh;
+  margin-top: 4.7rem;
+  overflow-y: scroll;
 
-  @include mobile {
-    flex-direction: column;
-    max-height: initial;
-  }
+  //@include mobile {
+  //  flex-direction: column;
+  //  max-height: initial;
+  //}
 
-  .sidebar {
-    display: flex;
-    flex-direction: column;
-    background-color: $gray2;
-    align-items: flex-start;
-
-    .logo {
-      width: 130px;
-      padding: 50px 0px 10px 40px;
-    }
-
-    @include mobile {
-      display: none;
-    }
-  }
+  //.sidebar {
+  //  display: flex;
+  //  flex-direction: column;
+  //  background-color: $gray2;
+  //  align-items: flex-start;
+  //
+  //  .logo {
+  //    width: 130px;
+  //    padding: 50px 0px 10px 40px;
+  //  }
+  //
+  //  @include mobile {
+  //    display: none;
+  //  }
+  //}
 
   .main {
     padding: 40px;
+    max-width: 80%;
     background-color: $gray1;
-    flex: 1;
-    overflow: auto;
-    position: relative;
-    @include mobile {
-      padding: 15px;
-    }
+    //position: relative;
+    margin: 0 auto;
+    //@include mobile {
+    //  padding: 15px;
+    //}
   }
 }

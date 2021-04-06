@@ -42,7 +42,7 @@ import CurrencyDropdown from "../selectCurrency/CurrencyDropdown";
 import "semantic-ui-css/semantic.min.css";
 import * as styles from "./Account.module.scss";
 
-function HKDAccount() {
+function Account({region}) {
     const dispatch = useDispatch();
     const isSynced = useSelector(selectIsSynced);
     const childBalance = useSelector(selectChildchainBalance, isEqual);
@@ -68,6 +68,44 @@ function HKDAccount() {
         dispatch,
     ]);
 
+    function currencyUnit(region, type = 1) {
+        if (type === 2) {
+            // symbol
+            switch (region) {
+                case 'hk':
+                    return 'HK$';
+                case 'us':
+                    return '$';
+                case 'cn':
+                    return '￥';
+                case 'th':
+                    return '฿';
+                case 'eu':
+                    return '€';
+                case 'sg':
+                    return 'S$';
+                default:
+                    return '';
+            }
+        } else {
+            switch (region) {
+                case 'hk':
+                    return 'HKD';
+                case 'us':
+                    return 'USD';
+                case 'cn':
+                    return 'RMB';
+                case 'th':
+                    return 'THB';
+                case 'eu':
+                    return 'EUR';
+                case 'sg':
+                    return 'SGD';
+                default:
+                    return '';
+            }
+        }
+    }
     return (
         <div className={styles.Account}>
             <h2>Hello</h2>
@@ -128,11 +166,11 @@ function HKDAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"HKD"}
+                                        {currencyUnit(region)}
                                     </span>
                                 </div>
                                 <span>
-                                    HK${" "}
+                                    {currencyUnit(region, 2)}{" "}
                                     {logAmount(i.amount * 16212, i.decimals)}
                                 </span>
                             </div>
@@ -142,6 +180,7 @@ function HKDAccount() {
                         <Button
                             onClick={() => handleModalClick("depositModal")}
                             type="primary"
+                            style={{marginRight: '5px'}}
                             disabled={!isSynced}
                         >
                             DEPOSIT
@@ -149,6 +188,7 @@ function HKDAccount() {
                         <Button
                             onClick={() => handleModalClick("exitModal")}
                             type="secondary"
+                            style={{marginLeft: '5px'}}
                             disabled={disabled}
                         >
                             WITHDRAW
@@ -169,11 +209,11 @@ function HKDAccount() {
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
                                     <span className={styles.symbol}>
-                                        {"HKD"}
+                                        {currencyUnit(region)}
                                     </span>
                                 </div>
                                 <span>
-                                    HK${" "}
+                                    {currencyUnit(region, 2)}{" "}
                                     {logAmount(i.amount * 16212, i.decimals)}
                                 </span>
                             </div>
@@ -185,4 +225,4 @@ function HKDAccount() {
     );
 }
 
-export default React.memo(HKDAccount);
+export default React.memo(Account);

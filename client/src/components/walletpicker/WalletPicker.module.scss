@@ -14,6 +14,7 @@ $gray7: #f2f3f5;
 .WalletPicker {
     width: 100vw;
     left: 0;
+    top: 0;
     position: fixed;
     background-color: $green;
     display: flex;
@@ -28,6 +29,7 @@ $gray7: #f2f3f5;
     box-shadow: 0 1px 5px #f2f3f5;
 
     .hamburgerMenu {
+        width: 200px;
         position: absolute;
         left: 50%;
         top: 160%;
@@ -40,6 +42,7 @@ $gray7: #f2f3f5;
         border-radius: 5px;
         //box-shadow: 0 0 10px #fff;
         border: 2px solid #fff;
+        z-index: 999;
         div {
             margin-bottom: 10px;
             border-bottom: 1px solid #fff;

@@ -20,12 +20,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { closeAlert, closeError } from "actions/uiAction";
 import { selectAlert, selectError } from "selectors/uiSelector";
 
-import HKDHome from "containers/home/HKDHome";
-import EUROHome from "containers/home/EUROHome";
-import RMBHome from "containers/home/RMBHome";
-import THBHome from "containers/home/THBHome";
-import USDHome from "containers/home/USDHome";
-import SGDHome from "containers/home/SGDHome";
+import Home from "containers/home/Home";
 import Header from "../../components/header/Header";
 import Advertpage from "containers/advertpage/Advertpage";
 import Auth from "containers/auth/Auth";
@@ -82,22 +77,22 @@ function App() {
                     />
                     <Route exact path="/authentification" component={Auth} />
                     <Route exact path="/hkdhome">
-                        {enabled && <HKDHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'hk'}/>}{" "}
                     </Route>
                     <Route exact path="/eurohome">
-                        {enabled && <EUROHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'eu'}/>}{" "}
                     </Route>
                     <Route exact path="/rmbhome">
-                        {enabled && <RMBHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'cn'}/>}{" "}
                     </Route>
                     <Route exact path="/thbhome">
-                        {enabled && <THBHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'th'}/>}{" "}
                     </Route>
                     <Route exact path="/usdhome">
-                        {enabled && <USDHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'us'}/>}{" "}
                     </Route>
                     <Route exact path="/sgdhome">
-                        {enabled && <SGDHome onEnable={setEnabled} />}{" "}
+                        {enabled && <Home onEnable={setEnabled} region={'sg'}/>}{" "}
                     </Route>
                 </Switch>
             </div>

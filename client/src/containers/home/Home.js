@@ -43,7 +43,7 @@ import MergeModal from "containers/modals/merge/MergeModal";
 import LedgerConnect from "containers/modals/ledger/LedgerConnect";
 
 import Status from "containers/status/Status";
-import HKDAccount from "containers/account/HKDAccount";
+import Account from "containers/account/Account";
 import Transactions from "containers/transactions/Transactions";
 
 import MobileHeader from "components/mobileheader/MobileHeader";
@@ -54,7 +54,8 @@ import * as styles from "./Home.module.scss";
 
 const POLL_INTERVAL = config.pollInterval * 1000;
 
-function HKDHome() {
+function Home(props) {
+    const {region} = props;
     const dispatch = useDispatch();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -129,19 +130,19 @@ function HKDHome() {
             />
 
             <div className={styles.Home}>
-                <div className={styles.sidebar}>
-                    <img className={styles.logo} src={logo} alt="omg-network" />
-                    <Status />
-                </div>
+                {/*<div className={styles.sidebar}>*/}
+                {/*    <img className={styles.logo} src={logo} alt="omg-network" />*/}
+                {/*    <Status />*/}
+                {/*</div>*/}
                 <div className={styles.main}>
-                    <MobileHeader
-                        mobileMenuOpen={mobileMenuOpen}
-                        onHamburgerClick={() =>
-                            setMobileMenuOpen((open) => !open)
-                        }
-                    />
-                    <MobileMenu mobileMenuOpen={mobileMenuOpen} />
-                    <HKDAccount />
+                    {/*<MobileHeader*/}
+                    {/*    mobileMenuOpen={mobileMenuOpen}*/}
+                    {/*    onHamburgerClick={() =>*/}
+                    {/*        setMobileMenuOpen((open) => !open)*/}
+                    {/*    }*/}
+                    {/*/>*/}
+                    {/*<MobileMenu mobileMenuOpen={mobileMenuOpen} />*/}
+                    <Account region={region}/>
                     <Transactions />
                 </div>
             </div>
@@ -149,4 +150,4 @@ function HKDHome() {
     );
 }
 
-export default React.memo(HKDHome);
+export default React.memo(Home);
