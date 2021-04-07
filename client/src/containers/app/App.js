@@ -27,6 +27,7 @@ import Auth from "containers/auth/Auth";
 import Wallet from "containers/wallet/Wallet";
 import WalletPicker from "components/walletpicker/WalletPicker";
 import Alert from "components/alert/Alert";
+import ProtectedRoute from "components/protectedroute/ProtectedRoute"; 
 
 import * as styles from "./App.module.scss";
 
@@ -64,24 +65,22 @@ function App() {
                 <WalletPicker onEnable={setEnabled} />
 
                 {/* {!enabled &&<Advertpage/>}
-      {!enabled && <Auth onEnable={setEnabled}/>} */}
+                {!enabled && <Auth onEnable={setEnabled}/>} */}
                 {/* {!enabled && <WalletPicker onEnable={setEnabled} />} */}
 
                 <Switch>
                     <Route exact path="/" component={Advertpage} />
-                    <Route
-                        exact
-                        path="/wallet"
-                        component={Wallet}
-                        onEnable={setEnabled}
-                    />
+
                     <Route exact path="/authentification" component={Auth} />
-                    <Route exact path="/hkdhome">
+
+                    <ProtectedRoute exact path="/wallet" component={Wallet} onEnable={setEnabled}/>
+                  
+                    <ProtectedRoute exact path="/hkdhome">
                         {enabled && <Home onEnable={setEnabled} region={'hk'}/>}{" "}
-                    </Route>
-                    <Route exact path="/eurohome">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/eurohome">
                         {enabled && <Home onEnable={setEnabled} region={'eu'}/>}{" "}
-                    </Route>
+                    </ProtectedRoute>
                     <Route exact path="/rmbhome">
                         {enabled && <Home onEnable={setEnabled} region={'cn'}/>}{" "}
                     </Route>

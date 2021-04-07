@@ -1,3 +1,6 @@
+$red: #ff6868;
+$gray7: #f2f3f5;
+
 
 .walletContainer{
     max-width: 80%;
@@ -12,7 +15,7 @@
     color: #0ebf9a;
 
     .walletMain{
-        width: 400px; 
+        width: 100%; 
         margin:auto; 
         text-align: center; 
 
@@ -26,18 +29,34 @@
             display: flex; 
             flex-direction:column; 
             font-size: 20px; 
-            padding-bottom: 20px;
-            input {
-                max-width: 150px;
-                padding: 15px;
-                margin: 0.5rem auto;
-                border-bottom: 1px solid #0ebf9a;
-                color: #0ebf9a;
+            padding: 2rem 2rem; 
+            
+            // input {
+            //     max-width: 150px;
+            //     padding: 15px;
+            //     margin: 0.5rem auto;
+            //     border-bottom: 1px solid #0ebf9a;
+            //     color: rgb(255, 192, 236);
+            // }
+
+            .redirectButtonHold{
+                display: flex; 
+                flex-direction:row; 
+                justify-content: space-between;
+                width: 400px;
+                margin:auto;  
+                padding-top: 2rem; 
+
+                .redirect{
+                    padding: 1rem 1rem;
+                    background-color: $red; 
+                    margin: auto;
+                    border-radius: 20px; 
+                    color: $gray7; 
+                }
+
             }
-            button{
-                width: 100px; 
-                margin: auto;
-            }
+            
         }
 
         

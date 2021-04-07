@@ -38,9 +38,10 @@ function WalletPicker({ onEnable }) {
     const dispatch = useDispatch();
     //const dropdownNode = useRef(null);
 
-    const [user, setUser] = useState(
-        JSON.parse(localStorage.getItem("profile"))
-    );
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [refresh, setRefresh] = useState(false); 
+    const forceUpdate = useCallback(() => setUser(user), [refresh]);
+ 
     const [walletEnabled, setWalletEnabled] = useState(false);
     const [accountsEnabled, setAccountsEnabled] = useState(false);
     const [wrongNetwork, setWrongNetwork] = useState(false);
@@ -59,11 +60,19 @@ function WalletPicker({ onEnable }) {
         [dispatch]
     );
 
+    const toLogin = () => {
+        history.push("/authentification");  
+        setRefresh(refresh); 
+        forceUpdate();  
+    }
+
     const logout = () => {
         dispatch({ type: "LOGOUT" });
         history.push("/");
         setUser(null);
     };
+
+   
 
     useEffect(() => {
         async function enableBrowserWallet() {
@@ -160,12 +169,7 @@ function WalletPicker({ onEnable }) {
         setAccountsEnabled(false);
     }
 
-    function toLogin() {
-        history.push("/authentification");
-        {
-            /*<Link to="/authentification" className={styles.btn}>Login</Link>*/
-        }
-    }
+    
 
     const browserEnabled = !!window.ethereum;
     const walletConnectEnabled = !!config.rpcProxy;

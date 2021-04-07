@@ -5,8 +5,8 @@ export const signin = ( formData, history) => async(dispatch) => {
     try {
         const { data } = await api.signIn(formData); 
 
-        console.log("DATA FROM ACTCREATOR ", data.token); 
-        localStorage.setItem('profile', JSON.stringify(data.token)); 
+        console.log("DATA FROM ACTCREATOR ", data); 
+        localStorage.setItem('profile', JSON.stringify(data)); 
 
         console.log(localStorage.getItem('profile')); 
 
