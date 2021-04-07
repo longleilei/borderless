@@ -106,6 +106,24 @@ function Account({region}) {
             }
         }
     }
+    function exchangeRatio(region) {
+        switch (region) {
+            case 'hk':
+                return 16212;
+            case 'us':
+                return 2106;
+            case 'cn':
+                return 13834;
+            case 'th':
+                return 56900;
+            case 'eu':
+                return 1769;
+            case 'sg':
+                return 2801;
+            default:
+                return 1;
+        }
+    }
     return (
         <div className={styles.Account}>
             <h2>Hello</h2>
@@ -171,7 +189,7 @@ function Account({region}) {
                                 </div>
                                 <span>
                                     {currencyUnit(region, 2)}{" "}
-                                    {logAmount(i.amount * 16212, i.decimals)}
+                                    {logAmount(exchangeRatio(region) * i.amount, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
@@ -214,7 +232,7 @@ function Account({region}) {
                                 </div>
                                 <span>
                                     {currencyUnit(region, 2)}{" "}
-                                    {logAmount(i.amount * 16212, i.decimals)}
+                                    {logAmount(exchangeRatio(region) * i.amount, i.decimals)}
                                 </span>
                             </div>
                         ) : null;
