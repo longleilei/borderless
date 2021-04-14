@@ -13,6 +13,7 @@
     "@material-ui/lab": "^4.0.0-alpha.39",
     "@omisego/omg-js": "^4.1.2-1.0.4",
     "@sentry/react": "^5.21.4",
+    "@truffle/hdwallet-provider": "^1.2.3",
     "@walletconnect/web3-provider": "^1.0.0-rc.3",
     "axios": "^0.21.1",
     "bignumber.js": "^9.0.0",
@@ -78,7 +79,8 @@
   },
   "devDependencies": {
     "@beam-australia/react-env": "2.1.2",
-    "audit-ci": "^2.5.1"
+    "audit-ci": "^2.5.1",
+    "chai": "^4.3.4"
   },
   "resolutions": {
     "http-proxy": "^1.18.1",

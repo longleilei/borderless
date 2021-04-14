@@ -1,5 +1,6 @@
 $red: #ff6868;
 $gray7: #f2f3f5;
+$black:#000;
 
 
 .walletContainer{
@@ -31,13 +32,32 @@ $gray7: #f2f3f5;
             font-size: 20px; 
             padding: 2rem 2rem; 
             
-            // input {
-            //     max-width: 150px;
-            //     padding: 15px;
-            //     margin: 0.5rem auto;
-            //     border-bottom: 1px solid #0ebf9a;
-            //     color: rgb(255, 192, 236);
-            // }
+            .balanceInfo{
+                margin: 0.5rem 0 0.5rem 0; 
+            }
+
+            .inputBox{
+                width: 200px; 
+                display: flex; 
+                flex-direction: column;
+                margin:auto; 
+
+                .input{
+                    height: 20px;
+                }
+
+                .btn{
+                    padding: 1rem 1rem;
+                    width: 200px; 
+                    background-color:$gray7; 
+                    margin: auto;
+                    border-radius: 20px; 
+                    color: $black; 
+                    margin: 2rem 0 2rem 0; 
+                }
+            }
+
+            
 
             .redirectButtonHold{
                 display: flex; 

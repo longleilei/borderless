@@ -28,6 +28,7 @@ import config from "util/config";
 import Button from "../../components/button/Button";
 import Hamburger from "../hamburger/Hamburger";
 
+
 import { Flag, Image } from "semantic-ui-react";
 
 import * as styles from "./WalletPicker.module.scss";
@@ -188,6 +189,11 @@ function WalletPicker({ onEnable }) {
                         </Link>
                     </div>
                 </div>
+                <div>
+                        <Link to="/wallet">
+                            <strong>Home</strong>
+                        </Link>
+                </div>
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
                     <Link to="/eurohome">EURO Wallet</Link>
                 </div>
@@ -204,9 +210,7 @@ function WalletPicker({ onEnable }) {
                     >
                         {isOpen && (
                             <div className={styles.hamburgerMenu}>
-                                <div>
-                                    <Link to="/wallet">Buy Currency</Link>
-                                </div>
+                                
                                 <div
                                     onClick={() =>
                                         dispatchSetWalletMethod("browser")
@@ -255,8 +259,7 @@ function WalletPicker({ onEnable }) {
                                     <Flag name="sg" />
                                     <Link to="/sgdhome">SGD Wallet</Link>
                                 </div>
-                                {/* <div>Sell Currency</div>
-                                <div>View Statistics</div> */}
+                                
                             </div>
                         )}
                     </Hamburger>

@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -31,6 +31,9 @@ import ProtectedRoute from "components/protectedroute/ProtectedRoute";
 
 import * as styles from "./App.module.scss";
 
+
+
+
 function App() {
     const dispatch = useDispatch();
 
@@ -40,6 +43,7 @@ function App() {
 
     const handleErrorClose = () => dispatch(closeError());
     const handleAlertClose = () => dispatch(closeAlert());
+
 
     return (
         <BrowserRouter>
