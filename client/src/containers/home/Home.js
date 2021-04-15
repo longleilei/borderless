@@ -55,7 +55,8 @@ import * as styles from "./Home.module.scss";
 const POLL_INTERVAL = config.pollInterval * 1000;
 
 function Home(props) {
-    const {region} = props;
+    const {region, serviceType, shToken} = props;
+    //const {serviceType} = props; 
     const dispatch = useDispatch();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -142,7 +143,7 @@ function Home(props) {
                     {/*    }*/}
                     {/*/>*/}
                     {/*<MobileMenu mobileMenuOpen={mobileMenuOpen} />*/}
-                    <Account region={region}/>
+                    <Account region={region} serviceType={serviceType} shToken={shToken}/>
                     <Transactions />
                 </div>
             </div>

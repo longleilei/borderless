@@ -78,6 +78,15 @@ function App() {
                     <Route exact path="/authentification" component={Auth} />
 
                     <ProtectedRoute exact path="/wallet" component={Wallet} onEnable={setEnabled}/>
+
+
+                    <ProtectedRoute exact path="/exchange">
+                        {enabled && <Home onEnable={setEnabled} shToken={false} serviceType={'exchange'} region={'hk'}/>}{" "}
+                    </ProtectedRoute>
+
+                    <ProtectedRoute exact path="/transfer">
+                        {enabled && <Home onEnable={setEnabled} shToken={true} serviceType={'transfer'} region={'hk'}/>}{" "}
+                    </ProtectedRoute>
                   
                     <ProtectedRoute exact path="/hkdhome">
                         {enabled && <Home onEnable={setEnabled} region={'hk'}/>}{" "}
@@ -85,6 +94,8 @@ function App() {
                     <ProtectedRoute exact path="/eurohome">
                         {enabled && <Home onEnable={setEnabled} region={'eu'}/>}{" "}
                     </ProtectedRoute>
+
+
                     <Route exact path="/rmbhome">
                         {enabled && <Home onEnable={setEnabled} region={'cn'}/>}{" "}
                     </Route>

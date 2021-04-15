@@ -13,7 +13,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
-import React, { useMemo, useCallback } from "react";
+import React, { useMemo, useCallback, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { isEqual } from "lodash";
 import truncate from "truncate-middle";
@@ -42,7 +42,7 @@ import CurrencyDropdown from "../selectCurrency/CurrencyDropdown";
 import "semantic-ui-css/semantic.min.css";
 import * as styles from "./Account.module.scss";
 
-function Account({region}) {
+function Account({region, serviceType, shToken}) {
     const dispatch = useDispatch();
     const isSynced = useSelector(selectIsSynced);
     const childBalance = useSelector(selectChildchainBalance, isEqual);
@@ -52,6 +52,9 @@ function Account({region}) {
     const criticalTransactionLoading = useSelector(
         selectLoading(["EXIT/CREATE"])
     );
+
+
+    const [serviceInfo, setServiceInfo] = useState(''); 
 
     const exitPending = useMemo(
         () => pendingExits.some((i) => i.status === "Pending"),
@@ -67,6 +70,58 @@ function Account({region}) {
     const handleModalClick = useCallback((name) => dispatch(openModal(name)), [
         dispatch,
     ]);
+
+
+    function serviceOption(serviceType){
+        switch(serviceType){
+            case 'transfer': 
+                setServiceInfo(serviceInfo => 'Transfer same currency to another wallet'); 
+                return 1; 
+            case 'exchange':
+                setServiceInfo(serviceInfo => 'Exchange two currencies');
+                return 2; 
+            default: 
+                return ''; 
+        }
+    }
+
+    function mappingWallet(region){
+
+        if(shToken){
+
+            let tokenWallet = childBalance.map((i, index) => {
+                return index == 1 && (
+                  <div key={index} className={styles.row}>
+                    <div className={styles.token}>
+                      <span className={styles.symbol}>{i.name}</span>
+                    </div>
+                    <span>{logAmount(i.amount, i.decimals)} HKD Coins </span>
+                  </div>
+                );
+              }); 
+
+              return tokenWallet; 
+            
+            } 
+
+            let ethWallet = childBalance.map((i, index) => {
+                return index == 0 && (
+                    <div key={index} className={styles.row}>
+                        <div className={styles.token}>
+                            <span className={styles.symbol}>
+                                {currencyUnit(region)}
+                            </span>
+                        </div>
+                        <span>
+                            {currencyUnit(region, 2)}{" "}
+                            {logAmount(exchangeRatio(region) * i.amount, i.decimals)}
+                        </span>
+                    </div>
+                );
+            })
+            return ethWallet; 
+
+    }
 
     function currencyUnit(region, type = 1) {
         if (type === 2) {
@@ -124,20 +179,15 @@ function Account({region}) {
                 return 1;
         }
     }
+
+    useEffect(() => {
+        serviceOption(serviceType); 
+    },[]); 
+
     return (
         <div className={styles.Account}>
-            <h2>Hello</h2>
-            {/* <Grid columns={2}>
-                <Grid.Row>
-                    <Grid.Column>
-                        <h2>Hello</h2>
-                    </Grid.Column>
-                    <Grid.Column textAlign="right">
-                        <CurrencyDropdown />
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid> */}
-
+            {/* {serviceOption(serviceType)} */}
+            <h2>{serviceInfo}</h2>
             <div className={styles.wallet}>
                 <span className={styles.address}></span>
                 <Copy value={networkService.account} />
@@ -179,7 +229,12 @@ function Account({region}) {
                             </div>
                         </div>
                     </div>
-                    {childBalance.map((i, index) => {
+
+
+                    {mappingWallet(region)}
+                    
+                
+                    {/* {childBalance.map((i, index) => {
                         return index == 0 ? (
                             <div key={index} className={styles.row}>
                                 <div className={styles.token}>
@@ -193,7 +248,7 @@ function Account({region}) {
                                 </span>
                             </div>
                         ) : null;
-                    })}
+                    })} */}
                     <div className={styles.buttons}>
                         <Button
                             onClick={() => handleModalClick("depositModal")}

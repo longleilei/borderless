@@ -292,15 +292,15 @@ const Wallet = () => {
                         {/* </div> */}
                         
 
-                        <div>Choose currency for exchange</div>
+                        <div>Choose service</div>
 
                         <div className={styles.redirectButtonHold}>
                             <div className={styles.redirect} onClick={() => dispatchSetWalletMethod("browser")}>
-                                <Link to="/eurohome">EURO Wallet</Link>
+                                <Link to="/exchange">Exchange</Link>
                             </div>
 
                             <div className={styles.redirect} onClick={() => dispatchSetWalletMethod("browser")}>
-                                <Link to="/hkdhome">HKD Wallet</Link>
+                                <Link to="/transfer">Transfer</Link>
                             </div>
                         </div>
                         

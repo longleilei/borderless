@@ -37,7 +37,7 @@ function WalletPicker({ onEnable }) {
     const history = useHistory();
     const location = useLocation();
     const dispatch = useDispatch();
-    //const dropdownNode = useRef(null);
+   
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
     const [refresh, setRefresh] = useState(false); 
@@ -73,7 +73,7 @@ function WalletPicker({ onEnable }) {
         setUser(null);
     };
 
-   
+    
 
     useEffect(() => {
         async function enableBrowserWallet() {
@@ -154,15 +154,9 @@ function WalletPicker({ onEnable }) {
         }
     }, [dispatch, walletEnabled, wrongNetwork]);
 
-    // useEffect(() => {
-    //   function handleClick (e) {
-    //     if (!dropdownNode.current.contains(e.target)) {
-    //       setShowAlternateNetworks(false);
-    //     }
-    //   }
-    //   document.addEventListener('mousedown', handleClick);
-    //   return () => document.removeEventListener('mousedown', handleClick);
-    // }, []);
+
+
+
 
     function resetSelection() {
         dispatchSetWalletMethod(null);
@@ -194,12 +188,15 @@ function WalletPicker({ onEnable }) {
                             <strong>Home</strong>
                         </Link>
                 </div>
+
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/eurohome">EURO Wallet</Link>
+                    <Link to="/exchange">Exchange</Link>
                 </div>
+
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
-                    <Link to="/hkdhome">HKD Wallet</Link>
+                    <Link to="/transfer">Transfer</Link>
                 </div>
+
                 <div className={styles.right}>
                     <Hamburger
                         isOpen={isOpen}
