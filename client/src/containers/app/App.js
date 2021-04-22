@@ -27,7 +27,8 @@ import Auth from "containers/auth/Auth";
 import Wallet from "containers/wallet/Wallet";
 import WalletPicker from "components/walletpicker/WalletPicker";
 import Alert from "components/alert/Alert";
-import ProtectedRoute from "components/protectedroute/ProtectedRoute"; 
+import ProtectedRoute from "components/protectedroute/ProtectedRoute";
+import RatioPage from "../RatioPage";
 
 import * as styles from "./App.module.scss";
 
@@ -107,6 +108,9 @@ function App() {
                     </Route>
                     <Route exact path="/sgdhome">
                         {enabled && <Home onEnable={setEnabled} region={'sg'}/>}{" "}
+                    </Route>
+                    <Route exact path="/exchange_ratio">
+                        {<RatioPage onEnable={setEnabled}/>}{" "}
                     </Route>
                 </Switch>
             </div>

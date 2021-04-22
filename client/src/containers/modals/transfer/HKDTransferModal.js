@@ -40,10 +40,47 @@ import { logAmount, powAmount } from "util/amountConvert";
 
 import { Grid } from "semantic-ui-react";
 import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
-
+import {getRatio} from "../../../util/exchangeRatio";
 import * as styles from "./TransferModal.module.scss";
 
-function HKDTransferModal({ open }) {
+function currencyUnit(region) {
+    switch (region) {
+        case 'hk':
+            return 'HKD';
+        case 'us':
+            return 'USD';
+        case 'th':
+            return 'THB';
+        case 'eu':
+            return 'EUR';
+        case 'sg':
+            return 'SGD';
+        case 'cn':
+            return 'CNY';
+        default:
+            return ''
+    }
+}
+function exchangeRatio(region) {
+    switch (region) {
+        case 'hk':
+            return 16212;
+        case 'us':
+            return 2106;
+        case 'cn':
+            return 13834;
+        case 'th':
+            return 56900;
+        case 'eu':
+            return 1769;
+        case 'sg':
+            return 2801;
+        default:
+            return 1;
+    }
+}
+
+function HKDTransferModal({open, region}) {
     const dispatch = useDispatch();
 
     const [currency, setCurrency] = useState("");
@@ -66,6 +103,10 @@ function HKDTransferModal({ open }) {
 
     const feesLoading = useSelector(selectLoading(["FEE/GET"]));
     const loading = useSelector(selectLoading(["TRANSFER/CREATE"]));
+
+    const [confirmModalOpen, setConfirm] = useState(false);
+    const [transferRegion, setTransferRegion] = useState('');
+    const [transferAmount, setAmount] = useState(0);
 
     useEffect(() => {
         async function fetchUTXOS() {
@@ -120,10 +161,31 @@ function HKDTransferModal({ open }) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: "HKD",
+        title: currencyUnit(region),
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * 16212, i.decimals)}`,
+        subTitle: `Balance: ${logAmount(i.amount * exchangeRatio(region), i.decimals)}`,
     }));
+
+    function confirmSubmission() {
+        console.log(transferRegion, region)
+            if (transferRegion && transferRegion !== region) {
+                // get rates
+                console.log('sdas')
+                getRatio().then(res => {
+                    const {conversion_rates} = res.data;
+                    const ratio = conversion_rates[currencyUnit(transferRegion)] / conversion_rates[currencyUnit(region)];
+                    setAmount(ratio * value);
+                    setConfirm(true);
+                }).catch(err => {
+                    console.log(err)
+                });
+            } else {
+                // same token transferred
+                setTransferRegion(region);
+                setAmount(value);
+            }
+            return;
+    }
 
     async function submit({ useLedgerSign }) {
         if (value > 0 && currency && feeToken && recipient) {
@@ -134,7 +196,7 @@ function HKDTransferModal({ open }) {
                         utxos: [...selectedUtxos, ...selectedFeeUtxos],
                         recipient,
                         value: powAmount(
-                            value / 16212,
+                            value / exchangeRatio(region), // hkd / 16212 -- convert back to ether
                             valueTokenInfo.decimals
                         ),
                         currency,
@@ -463,7 +525,7 @@ function HKDTransferModal({ open }) {
                             <h2>Transfer</h2>
                         </Grid.Column>
                         <Grid.Column textAlign="right">
-                            <CurrencyDropdown />
+                            <CurrencyDropdown setRegion={setTransferRegion}/>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -495,8 +557,8 @@ function HKDTransferModal({ open }) {
                         setSelectedFeeUtxos([]);
                     }}
                     selectValue={currency}
-                    maxValue={getMaxTransferValue() * 16212}
-                    flag="hk"
+                    maxValue={getMaxTransferValue() * exchangeRatio(region)}
+                    flag={region}
                 />
 
                 {value > 0 && (
@@ -544,7 +606,7 @@ function HKDTransferModal({ open }) {
                         onClick={() => {
                             ledgerConnect
                                 ? setLedgerModal(true)
-                                : submit({ useLedgerSign: false });
+                                : confirmSubmission()
                         }}
                         type="primary"
                         loading={loading}
@@ -559,18 +621,43 @@ function HKDTransferModal({ open }) {
     }
 
     return (
-        <Modal open={open}>
-            {!ledgerModal && !utxoPicker && renderTransferScreen()}
-            {!ledgerModal && utxoPicker && renderUtxoPicker()}
-            {ledgerModal && (
-                <LedgerPrompt
-                    loading={loading}
-                    submit={submit}
-                    handleClose={handleClose}
-                    typedData={typedData}
-                />
-            )}
-        </Modal>
+        <>
+            <Modal open={open}>
+                {!ledgerModal && !utxoPicker && renderTransferScreen()}
+                {!ledgerModal && utxoPicker && renderUtxoPicker()}
+                {ledgerModal && (
+                    <LedgerPrompt
+                        loading={loading}
+                        submit={submit}
+                        handleClose={handleClose}
+                        typedData={typedData}
+                    />
+                )}
+            </Modal>
+            {
+                <Modal open={confirmModalOpen}>
+                    <div style={{marginBottom: '30px'}}>
+                        The Recipient Will Receive {`${(transferAmount).toFixed(2)} ${currencyUnit(transferRegion)}`} From You,
+                        Are You Sure To Continue?
+                    </div>
+                    <Button
+                        onClick={()=>{setConfirm(false)}}
+                        type="outline"
+                        className={styles.button}
+                    >CANCEL
+                    </Button>
+                    <Button
+                        type={'primary'}
+                        onClick={()=>{
+                            submit({ useLedgerSign: false });
+                            setConfirm(false);
+                        }}
+                    >
+                        CONFIRM
+                    </Button>
+                </Modal>
+            }
+        </>
     );
 }
 

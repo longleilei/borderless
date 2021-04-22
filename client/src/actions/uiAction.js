@@ -13,9 +13,10 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
-export function openModal (modal) {
+export function openModal (modal, region = '') {
+  console.log(region, 'sdasdadsa')
   return function (dispatch) {
-    return dispatch({ type: 'UI/MODAL/OPEN', payload: modal });
+    return dispatch({ type: 'UI/MODAL/OPEN', payload: modal, region });
   };
 }
 

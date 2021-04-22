@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { Dropdown } from "semantic-ui-react";
 
 //  buggy css, should be deleted
@@ -13,13 +13,22 @@ const countryOptions = [
     { key: "us", value: "us", flag: "us", text: "USD" },
 ];
 
-const CurrencyDropdown = () => (
-    <Dropdown
-        placeholder="Select Currency"
-        search
-        selection
-        options={countryOptions}
-    />
-);
+const CurrencyDropdown = ({setRegion}) => {
+    const [value, setValue] = useState('')
+
+    return (
+        <Dropdown
+            placeholder="Select Currency"
+            search
+            selection
+            options={countryOptions}
+            onChange={(e, {value}) => {
+                setValue(value);
+                setRegion(value);
+            }}
+            value={value}
+        />
+    )
+}
 
 export default CurrencyDropdown;

@@ -67,7 +67,7 @@ function Account({region, serviceType, shToken}) {
     const disabled =
         !childBalance.length || !isSynced || exitPending || transferPending;
 
-    const handleModalClick = useCallback((name) => dispatch(openModal(name)), [
+    const handleModalClick = useCallback((name, region) => dispatch(openModal(name, region)), [
         dispatch,
     ]);
 
@@ -215,7 +215,7 @@ function Account({region, serviceType, shToken}) {
                             </div>
                             <div
                                 onClick={() =>
-                                    handleModalClick("transferModal")
+                                    handleModalClick("transferModal", region)
                                 }
                                 className={[
                                     styles.transfer,

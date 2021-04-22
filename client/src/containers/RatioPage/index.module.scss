@@ -1,0 +1,32 @@
+$gray1: #101010;
+$green: #0ebf9a;
+.rateContainer {
+  margin-top: 4.7rem;
+  overflow-y: scroll;
+  .main {
+    min-height: 90vh;
+    padding: 70px;
+    max-width: 80%;
+    background-color: $gray1;
+    margin: 0 auto;
+    .log {
+      padding: 10px;
+      width: 50%;
+      font-size: 20px;
+      margin: 0 auto;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      border-bottom: #b3b3bf dashed 1px;
+      //margin-top: 30px;
+      background: #585868;
+      &:first-of-type {
+        border-radius: 5px 5px 0 0;
+        background: $green;
+      }
+      &:last-of-type {
+        border-radius: 0 0 5px 5px;
+      }
+    }
+  }
+}

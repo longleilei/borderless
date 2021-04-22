@@ -120,8 +120,8 @@ function Home(props) {
 
     return (
         <>
-            <HKDDepositModal open={depositModalState} />
-            <HKDTransferModal open={transferModalState} />
+            <HKDDepositModal open={depositModalState} region={region}/>
+            <HKDTransferModal open={transferModalState} region={region}/>
             <ExitModal open={exitModalState} />
             <MergeModal open={mergeModalState} />
             <LedgerConnect

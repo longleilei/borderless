@@ -256,7 +256,9 @@ function WalletPicker({ onEnable }) {
                                     <Flag name="sg" />
                                     <Link to="/sgdhome">SGD Wallet</Link>
                                 </div>
-                                
+                                <div>
+                                    <Link to="/exchange_ratio" >Exchange Ratio</Link>
+                                </div>
                             </div>
                         )}
                     </Hamburger>

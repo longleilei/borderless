@@ -23,13 +23,14 @@ const initialState = {
   ledger: false,
   alert: null,
   error: null,
-  activeHistoryTab: 'Transactions'
+  activeHistoryTab: 'Transactions',
+  region: '',
 };
 
 function uiReducer (state = initialState, action) {
   switch (action.type) {
     case 'UI/MODAL/OPEN':
-      return { ...state, [action.payload]: true };
+      return { ...state, [action.payload]: true, region: action.region };
     case 'UI/MODAL/CLOSE':
       return { ...state, [action.payload]: false };
     case 'UI/ALERT/UPDATE':
