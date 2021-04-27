@@ -182,7 +182,7 @@ function Account({region, serviceType, shToken}) {
 
     useEffect(() => {
         serviceOption(serviceType); 
-    },[]); 
+    },[serviceType]); 
 
     return (
         <div className={styles.Account}>

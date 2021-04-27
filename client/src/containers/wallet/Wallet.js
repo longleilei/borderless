@@ -63,6 +63,17 @@ const Wallet = () => {
         setUser(null);
     };
 
+    const getUserName = () => {
+        if(typeof user.result === 'string' ){
+            return user.result;
+        } else {
+            return user.result.username; 
+        }
+        
+        
+    }
+        
+
     // const loadWeb3 = async() => {
     //     if(window.ethereum){
     //         window.web3 = new Web3(window.ethereum); 
@@ -255,7 +266,7 @@ const Wallet = () => {
         <>
             <div className={styles.walletContainer}>
                 <div className={styles.walletMain}>
-                    <div className={styles.userGreeting}>{`Welcome back, ${user.result.username}`}</div>
+                    <div className={styles.userGreeting}>{`Welcome back, ${getUserName()}`}</div>
 
                     <div className={styles.mainInfo}>
 

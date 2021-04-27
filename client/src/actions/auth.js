@@ -5,11 +5,7 @@ export const signin = ( formData, history) => async(dispatch) => {
     try {
         const { data } = await api.signIn(formData); 
 
-        console.log("DATA FROM ACTCREATOR ", data); 
         localStorage.setItem('profile', JSON.stringify(data)); 
-
-        console.log(localStorage.getItem('profile')); 
-
 
         dispatch({ type: 'AUTH', payload: data }); 
 

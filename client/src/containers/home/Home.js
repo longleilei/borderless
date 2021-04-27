@@ -55,8 +55,7 @@ import * as styles from "./Home.module.scss";
 const POLL_INTERVAL = config.pollInterval * 1000;
 
 function Home(props) {
-    const {region, serviceType, shToken} = props;
-    //const {serviceType} = props; 
+    const {region, serviceType, shToken} = props; 
     const dispatch = useDispatch();
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
