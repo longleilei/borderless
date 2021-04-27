@@ -94,6 +94,7 @@ function Account({region, serviceType, shToken}) {
                   <div key={index} className={styles.row}>
                     <div className={styles.token}>
                       <span className={styles.symbol}>{i.name}</span>
+                      {currencyUnit(region)}
                     </div>
                     <span>{logAmount(i.amount, i.decimals)} HKD Coins </span>
                   </div>
@@ -139,6 +140,8 @@ function Account({region, serviceType, shToken}) {
                     return '€';
                 case 'sg':
                     return 'S$';
+                case 'hkdcoin': 
+                    return 'HKD Coin';
                 default:
                     return '';
             }
@@ -156,6 +159,8 @@ function Account({region, serviceType, shToken}) {
                     return 'EUR';
                 case 'sg':
                     return 'SGD';
+                case 'hkdcoin': 
+                    return 'HKD Coin'; 
                 default:
                     return '';
             }
@@ -175,6 +180,8 @@ function Account({region, serviceType, shToken}) {
                 return 1769;
             case 'sg':
                 return 2801;
+            case 'hkdcoin':
+                return 1; 
             default:
                 return 1;
         }

@@ -18,14 +18,13 @@ import { getRatio } from "../../util/exchangeRatio";
 import {Flag, Loader} from 'semantic-ui-react';
 import * as styles from "./index.module.scss";
 
-const cur = ['USD', 'HKD', 'SGD', 'THB', 'CNY', 'EUR'];
-const flag = ['us', 'hk', 'sg', 'th', 'cn', 'eu'];
+const cur = ['USD', 'HKD', 'SGD', 'THB', 'CNY', 'EUR', 'HKD Coin'];
+const flag = ['us', 'hk', 'sg', 'th', 'cn', 'eu', 'hk'];
 
 function RatioPage(props) {
     const [ratios, setRatios] = useState([]);
     const [loading, setLoading] = useState(true);
     useEffect(() => {
-        console.log('here');
         getRatio()
             .then(res => {
                 const {conversion_rates} = res.data;

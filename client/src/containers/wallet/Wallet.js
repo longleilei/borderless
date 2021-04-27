@@ -63,14 +63,26 @@ const Wallet = () => {
         setUser(null);
     };
 
+    const redirectToWelcomePage = () =>{
+        alert('Please, register or signin'); 
+        history.push("/");
+    }
+
+    // const checkNull = () => {
+    //     if(user.result === 'null'){
+    //         return true; 
+    //     }
+    //     return false; 
+    // }
+
     const getUserName = () => {
+        
         if(typeof user.result === 'string' ){
+            
             return user.result;
         } else {
             return user.result.username; 
-        }
-        
-        
+        } 
     }
         
 
@@ -266,7 +278,8 @@ const Wallet = () => {
         <>
             <div className={styles.walletContainer}>
                 <div className={styles.walletMain}>
-                    <div className={styles.userGreeting}>{`Welcome back, ${getUserName()}`}</div>
+                <div className={styles.userGreeting}>{`Welcome back, ${getUserName()}`}</div>
+                    
 
                     <div className={styles.mainInfo}>
 

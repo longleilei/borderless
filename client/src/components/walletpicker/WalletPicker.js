@@ -73,6 +73,15 @@ function WalletPicker({ onEnable }) {
         setUser(null);
     };
 
+    const checkToken = () => {
+        const token = JSON.parse(localStorage.getItem("profile")); 
+        
+        if(token === 'null'){
+        alert('Please, register or login'); 
+        history.push('/'); 
+        }
+    }
+
     
 
     useEffect(() => {
@@ -183,8 +192,8 @@ function WalletPicker({ onEnable }) {
                         </Link>
                     </div>
                 </div>
-                <div>
-                        <Link to="/wallet">
+                <div onClick={checkToken}>
+                        <Link to="/wallet" >
                             <strong>Home</strong>
                         </Link>
                 </div>
@@ -216,6 +225,8 @@ function WalletPicker({ onEnable }) {
                                     <Flag name="hk" />
                                     <Link to="/hkdhome">HKD Wallet</Link>
                                 </div>
+
+                                
                                 <div
                                     onClick={() =>
                                         dispatchSetWalletMethod("browser")

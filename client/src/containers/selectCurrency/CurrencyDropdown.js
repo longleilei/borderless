@@ -11,6 +11,7 @@ const countryOptions = [
     { key: "sg", value: "sg", flag: "sg", text: "SGD" },
     { key: "th", value: "th", flag: "th", text: "THB" },
     { key: "us", value: "us", flag: "us", text: "USD" },
+    { key: "hkdcoin", value: "hkdcoin", flag: "hk", text: "HKD Coin" },
 ];
 
 const CurrencyDropdown = ({setRegion}) => {

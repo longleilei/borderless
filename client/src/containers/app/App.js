@@ -13,7 +13,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License. */
 
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 
@@ -44,6 +45,7 @@ function App() {
 
     const handleErrorClose = () => dispatch(closeError());
     const handleAlertClose = () => dispatch(closeAlert());
+
 
 
     return (
@@ -86,7 +88,7 @@ function App() {
                     </ProtectedRoute>
 
                     <ProtectedRoute exact path="/transfer">
-                        {enabled && <Home onEnable={setEnabled} shToken={true} serviceType={'transfer'} region={'hk'}/>}{" "}
+                        {enabled && <Home onEnable={setEnabled} shToken={true} serviceType={'transfer'} region={'hkdcoin'}/>}{" "}
                     </ProtectedRoute>
                   
                     <ProtectedRoute exact path="/hkdhome">
