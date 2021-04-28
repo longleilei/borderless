@@ -80,8 +80,11 @@ function App() {
 
                     <Route exact path="/authentification" component={Auth} />
 
-                    <ProtectedRoute exact path="/wallet" component={Wallet} onEnable={setEnabled}/>
+                    {/* <ProtectedRoute exact path="/wallet" component={Wallet} onEnable={setEnabled}/> */}
 
+                    <ProtectedRoute exact path="/wallet">
+                        {enabled && <Wallet onEnable={setEnabled} />}
+                    </ProtectedRoute>
 
                     <ProtectedRoute exact path="/exchange">
                         {enabled && <Home onEnable={setEnabled} shToken={false} serviceType={'exchange'} region={'hk'}/>}{" "}
@@ -99,18 +102,21 @@ function App() {
                     </ProtectedRoute>
 
 
-                    <Route exact path="/rmbhome">
+                    <ProtectedRoute exact path="/rmbhome">
                         {enabled && <Home onEnable={setEnabled} region={'cn'}/>}{" "}
-                    </Route>
-                    <Route exact path="/thbhome">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/thbhome">
                         {enabled && <Home onEnable={setEnabled} region={'th'}/>}{" "}
-                    </Route>
-                    <Route exact path="/usdhome">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/usdhome">
                         {enabled && <Home onEnable={setEnabled} region={'us'}/>}{" "}
-                    </Route>
-                    <Route exact path="/sgdhome">
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/sgdhome">
                         {enabled && <Home onEnable={setEnabled} region={'sg'}/>}{" "}
-                    </Route>
+                    </ProtectedRoute>
+                    <ProtectedRoute exact path="/uahome">
+                        {enabled && <Home onEnable={setEnabled} region={'ua'}/>}{" "}
+                    </ProtectedRoute>
                     <Route exact path="/exchange_ratio">
                         {<RatioPage onEnable={setEnabled}/>}{" "}
                     </Route>

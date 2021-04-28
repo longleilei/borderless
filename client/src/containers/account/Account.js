@@ -140,6 +140,8 @@ function Account({region, serviceType, shToken}) {
                     return '€';
                 case 'sg':
                     return 'S$';
+                case 'ua':
+                    return '₴'; 
                 case 'hkdcoin': 
                     return 'HKD Coin';
                 default:
@@ -159,6 +161,8 @@ function Account({region, serviceType, shToken}) {
                     return 'EUR';
                 case 'sg':
                     return 'SGD';
+                case 'ua': 
+                    return 'UAH'; 
                 case 'hkdcoin': 
                     return 'HKD Coin'; 
                 default:
@@ -180,6 +184,8 @@ function Account({region, serviceType, shToken}) {
                 return 1769;
             case 'sg':
                 return 2801;
+            case 'ua': 
+                return 73217; 
             case 'hkdcoin':
                 return 1; 
             default:

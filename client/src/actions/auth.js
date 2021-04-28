@@ -25,7 +25,9 @@ export const signup = (formData, history ) => async(dispatch) => {
     try{
         const { data } = await api.signUp(formData); 
 
-        localStorage.setItem('profile', JSON.stringify(data.token)); 
+        console.log("GET IT HERE ", data); 
+
+        localStorage.setItem('profile', JSON.stringify(data)); 
 
         dispatch({ type: 'AUTH', data }); 
 

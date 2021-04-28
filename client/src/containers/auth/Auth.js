@@ -91,7 +91,7 @@ const Auth = () => {
                             <>
                                 <label>
                                     Confirm Password: 
-                                    <input type="text" name="confirmPassword" onChange={handleChange} type={showPassword ?  "text": "password"} handleShowPassword={handleShowPassword} />
+                                    <input type="text" name="confirmPassword" onChange={handleChange} type={showPassword ?  "text": "password"} />
                                 </label>
                             </>
                         ) }

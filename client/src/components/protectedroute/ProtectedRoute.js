@@ -9,7 +9,12 @@ const ProtectedRoute = ({ children, ...props }) => {
     const isAuthenticated = () => {
 
         const userToken = JSON.parse(localStorage.getItem("profile"));
-        return userToken ? true : false; 
+        if(userToken){
+            return true; 
+        }
+
+        alert('Please login or register'); 
+        return false;  
     }
 
     

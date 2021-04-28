@@ -40,6 +40,7 @@ function WalletPicker({ onEnable }) {
    
 
     const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
+    const [ token, setToken ] = useState(false); 
     const [refresh, setRefresh] = useState(false); 
     const forceUpdate = useCallback(() => setUser(user), [refresh]);
  
@@ -72,16 +73,6 @@ function WalletPicker({ onEnable }) {
         history.push("/");
         setUser(null);
     };
-
-    const checkToken = () => {
-        const token = JSON.parse(localStorage.getItem("profile")); 
-        
-        if(token === 'null'){
-        alert('Please, register or login'); 
-        history.push('/'); 
-        }
-    }
-
     
 
     useEffect(() => {
@@ -163,7 +154,7 @@ function WalletPicker({ onEnable }) {
         }
     }, [dispatch, walletEnabled, wrongNetwork]);
 
-
+    
 
 
 
@@ -192,11 +183,12 @@ function WalletPicker({ onEnable }) {
                         </Link>
                     </div>
                 </div>
-                <div onClick={checkToken}>
-                        <Link to="/wallet" >
-                            <strong>Home</strong>
-                        </Link>
+                <div>
+                    <Link to="/wallet" >
+                        <strong>Home</strong>
+                    </Link>
                 </div>
+                
 
                 <div onClick={() => dispatchSetWalletMethod("browser")}>
                     <Link to="/exchange">Exchange</Link>
@@ -266,6 +258,14 @@ function WalletPicker({ onEnable }) {
                                 >
                                     <Flag name="sg" />
                                     <Link to="/sgdhome">SGD Wallet</Link>
+                                </div>
+                                <div
+                                    onClick={() =>
+                                        dispatchSetWalletMethod("browser")
+                                    }
+                                >
+                                    <Flag name="ua" />
+                                    <Link to="/uahome">UA Wallet</Link>
                                 </div>
                                 <div>
                                     <Link to="/exchange_ratio" >Exchange Ratio</Link>

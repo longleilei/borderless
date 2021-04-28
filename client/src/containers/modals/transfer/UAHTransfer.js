@@ -40,55 +40,10 @@ import { logAmount, powAmount } from "util/amountConvert";
 
 import { Grid } from "semantic-ui-react";
 import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
-import {getRatio} from "../../../util/exchangeRatio";
+
 import * as styles from "./TransferModal.module.scss";
 
-function currencyUnit(region) {
-    switch (region) {
-        case 'hk':
-            return 'HKD';
-        case 'us':
-            return 'USD';
-        case 'th':
-            return 'THB';
-        case 'eu':
-            return 'EUR';
-        case 'sg':
-            return 'SGD';
-        case 'cn':
-            return 'CNY';
-        case 'ua':
-            return 'UAH'; 
-        case 'hkdcoin':
-            return 'HKD Coin'; 
-        default:
-            return ''
-    }
-}
-function exchangeRatio(region) {
-    switch (region) {
-        case 'hk':
-            return 16212;
-        case 'us':
-            return 2106;
-        case 'cn':
-            return 13834;
-        case 'th':
-            return 56900;
-        case 'eu':
-            return 1769;
-        case 'sg':
-            return 2801;
-        case 'ua':
-            return 73217; 
-        case 'hkdcoin':
-            return 1; 
-        default:
-            return 1;
-    }
-}
-
-function HKDTransferModal({open, region}) {
+function UAHTransferModal({ open }) {
     const dispatch = useDispatch();
 
     const [currency, setCurrency] = useState("");
@@ -112,10 +67,6 @@ function HKDTransferModal({open, region}) {
     const feesLoading = useSelector(selectLoading(["FEE/GET"]));
     const loading = useSelector(selectLoading(["TRANSFER/CREATE"]));
 
-    const [confirmModalOpen, setConfirm] = useState(false);
-    const [transferRegion, setTransferRegion] = useState('');
-    const [transferAmount, setAmount] = useState(0);
-
     useEffect(() => {
         async function fetchUTXOS() {
             const _utxos = await networkService.getUtxos();
@@ -126,7 +77,6 @@ function HKDTransferModal({open, region}) {
             fetchUTXOS();
         }
     }, [open]);
-
 
     useEffect(() => {
         if (Object.keys(fees).length) {
@@ -170,31 +120,10 @@ function HKDTransferModal({open, region}) {
     }, [usableFees, feeToken]);
 
     const selectOptions = balances.map((i) => ({
-        title: currencyUnit(region),
+        title: "UAH",
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * exchangeRatio(region), i.decimals)}`,
+        subTitle: `Balance: ${logAmount(i.amount * 73217, i.decimals)}`,
     }));
-
-    function confirmSubmission() {
-        //console.log(transferRegion, region)
-            if (transferRegion && transferRegion !== region) {
-                // get rates
-                getRatio().then(res => {
-                    const {conversion_rates} = res.data;
-                    const ratio = conversion_rates[currencyUnit(transferRegion).toFixed(2)] / conversion_rates[currencyUnit(region)];
-                    setAmount(ratio * value);
-                    setConfirm(true);
-                }).catch(err => {
-                    console.log(err)
-                });
-            } else {
-                // same token transferred
-                setTransferRegion(region);
-                setAmount(value);
-                setConfirm(true);
-            }
-            return;
-    }
 
     async function submit({ useLedgerSign }) {
         if (value > 0 && currency && feeToken && recipient) {
@@ -204,10 +133,7 @@ function HKDTransferModal({open, region}) {
                     getTransferTypedData({
                         utxos: [...selectedUtxos, ...selectedFeeUtxos],
                         recipient,
-                        value: powAmount(
-                            value / exchangeRatio(region), // hkd / 16212 -- convert back to ether
-                            valueTokenInfo.decimals
-                        ),
+                        value: powAmount(value / 73217, valueTokenInfo.decimals),
                         currency,
                         feeToken,
                         metadata,
@@ -254,7 +180,7 @@ function HKDTransferModal({open, region}) {
         !currency ||
         !feeToken ||
         !recipient ||
-        new BN(value).gt(new BN(getMaxTransferValue() * 16212));
+        new BN(value).gt(new BN(getMaxTransferValue() * 73217));
 
     function getMaxTransferValue() {
         const transferingBalanceObject = balances.find(
@@ -534,7 +460,7 @@ function HKDTransferModal({open, region}) {
                             <h2>Transfer</h2>
                         </Grid.Column>
                         <Grid.Column textAlign="right">
-                            <CurrencyDropdown setRegion={setTransferRegion}/>
+                            <CurrencyDropdown />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -566,8 +492,8 @@ function HKDTransferModal({open, region}) {
                         setSelectedFeeUtxos([]);
                     }}
                     selectValue={currency}
-                    maxValue={getMaxTransferValue() * exchangeRatio(region)}
-                    flag={region}
+                    maxValue={getMaxTransferValue() * 73217}
+                    flag="ua"
                 />
 
                 {value > 0 && (
@@ -615,7 +541,7 @@ function HKDTransferModal({open, region}) {
                         onClick={() => {
                             ledgerConnect
                                 ? setLedgerModal(true)
-                                : confirmSubmission()
+                                : submit({ useLedgerSign: false });
                         }}
                         type="primary"
                         loading={loading}
@@ -630,44 +556,19 @@ function HKDTransferModal({open, region}) {
     }
 
     return (
-        <>
-            <Modal open={open}>
-                {!ledgerModal && !utxoPicker && renderTransferScreen()}
-                {!ledgerModal && utxoPicker && renderUtxoPicker()}
-                {ledgerModal && (
-                    <LedgerPrompt
-                        loading={loading}
-                        submit={submit}
-                        handleClose={handleClose}
-                        typedData={typedData}
-                    />
-                )}
-            </Modal>
-            {
-                <Modal open={confirmModalOpen}>
-                    <div style={{marginBottom: '30px'}}>
-                        The Recipient Will Receive {`${(transferAmount)} ${currencyUnit(transferRegion)}`} From You,
-                        Are You Sure To Continue?
-                    </div>
-                    <Button
-                        onClick={()=>{setConfirm(false)}}
-                        type="outline"
-                        className={styles.button}
-                    >CANCEL
-                    </Button>
-                    <Button
-                        type={'primary'}
-                        onClick={()=>{
-                            submit({ useLedgerSign: false });
-                            setConfirm(false);
-                        }}
-                    >
-                        CONFIRM
-                    </Button>
-                </Modal>
-            }
-        </>
+        <Modal open={open}>
+            {!ledgerModal && !utxoPicker && renderTransferScreen()}
+            {!ledgerModal && utxoPicker && renderUtxoPicker()}
+            {ledgerModal && (
+                <LedgerPrompt
+                    loading={loading}
+                    submit={submit}
+                    handleClose={handleClose}
+                    typedData={typedData}
+                />
+            )}
+        </Modal>
     );
 }
 
-export default React.memo(HKDTransferModal);
+export default React.memo(UAHTransferModal);
