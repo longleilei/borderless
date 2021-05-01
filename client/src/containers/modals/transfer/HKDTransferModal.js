@@ -40,55 +40,55 @@ import { logAmount, powAmount } from "util/amountConvert";
 
 import { Grid } from "semantic-ui-react";
 import CurrencyDropdown from "../../selectCurrency/CurrencyDropdown";
-import {getRatio} from "../../../util/exchangeRatio";
+import { getRatio } from "../../../util/exchangeRatio";
 import * as styles from "./TransferModal.module.scss";
 
 function currencyUnit(region) {
     switch (region) {
-        case 'hk':
-            return 'HKD';
-        case 'us':
-            return 'USD';
-        case 'th':
-            return 'THB';
-        case 'eu':
-            return 'EUR';
-        case 'sg':
-            return 'SGD';
-        case 'cn':
-            return 'CNY';
-        case 'ua':
-            return 'UAH'; 
-        case 'hkdcoin':
-            return 'HKD Coin'; 
+        case "hk":
+            return "HKD";
+        case "us":
+            return "USD";
+        case "th":
+            return "THB";
+        case "eu":
+            return "EUR";
+        case "sg":
+            return "SGD";
+        case "cn":
+            return "CNY";
+        case "ua":
+            return "UAH";
+        case "hkdcoin":
+            return "HKD Coin";
         default:
-            return ''
+            return "";
     }
 }
 function exchangeRatio(region) {
     switch (region) {
-        case 'hk':
+        case "hk":
             return 16212;
-        case 'us':
+        case "us":
             return 2106;
-        case 'cn':
+        case "cn":
             return 13834;
-        case 'th':
+        case "th":
             return 56900;
-        case 'eu':
+        case "eu":
             return 1769;
-        case 'sg':
+        case "sg":
             return 2801;
-        case 'ua':
-            return 73217; 
-        case 'hkdcoin':
-            return 1; 
+        case "ua":
+            return 73217;
+        case "hkdcoin":
+            return 1;
         default:
             return 1;
     }
 }
 
-function HKDTransferModal({open, region}) {
+function HKDTransferModal({ open, region }) {
     const dispatch = useDispatch();
 
     const [currency, setCurrency] = useState("");
@@ -113,7 +113,7 @@ function HKDTransferModal({open, region}) {
     const loading = useSelector(selectLoading(["TRANSFER/CREATE"]));
 
     const [confirmModalOpen, setConfirm] = useState(false);
-    const [transferRegion, setTransferRegion] = useState('');
+    const [transferRegion, setTransferRegion] = useState("");
     const [transferAmount, setAmount] = useState(0);
 
     useEffect(() => {
@@ -126,7 +126,6 @@ function HKDTransferModal({open, region}) {
             fetchUTXOS();
         }
     }, [open]);
-
 
     useEffect(() => {
         if (Object.keys(fees).length) {
@@ -172,28 +171,35 @@ function HKDTransferModal({open, region}) {
     const selectOptions = balances.map((i) => ({
         title: currencyUnit(region),
         value: i.currency,
-        subTitle: `Balance: ${logAmount(i.amount * exchangeRatio(region), i.decimals)}`,
+        subTitle: `Balance: ${logAmount(
+            i.amount * exchangeRatio(region),
+            i.decimals
+        )}`,
     }));
 
     function confirmSubmission() {
         //console.log(transferRegion, region)
-            if (transferRegion && transferRegion !== region) {
-                // get rates
-                getRatio().then(res => {
-                    const {conversion_rates} = res.data;
-                    const ratio = conversion_rates[currencyUnit(transferRegion).toFixed(2)] / conversion_rates[currencyUnit(region)];
+        if (transferRegion && transferRegion !== region) {
+            // get rates
+            getRatio()
+                .then((res) => {
+                    const { conversion_rates } = res.data;
+                    const ratio =
+                        conversion_rates[currencyUnit(transferRegion)] /
+                        conversion_rates[currencyUnit(region)];
                     setAmount(ratio * value);
                     setConfirm(true);
-                }).catch(err => {
-                    console.log(err)
+                })
+                .catch((err) => {
+                    console.log(err);
                 });
-            } else {
-                // same token transferred
-                setTransferRegion(region);
-                setAmount(value);
-                setConfirm(true);
-            }
-            return;
+        } else {
+            // same token transferred
+            setTransferRegion(region);
+            setAmount(value);
+            setConfirm(true);
+        }
+        return;
     }
 
     async function submit({ useLedgerSign }) {
@@ -534,7 +540,7 @@ function HKDTransferModal({open, region}) {
                             <h2>Transfer</h2>
                         </Grid.Column>
                         <Grid.Column textAlign="right">
-                            <CurrencyDropdown setRegion={setTransferRegion}/>
+                            <CurrencyDropdown setRegion={setTransferRegion} />
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
@@ -615,7 +621,7 @@ function HKDTransferModal({open, region}) {
                         onClick={() => {
                             ledgerConnect
                                 ? setLedgerModal(true)
-                                : confirmSubmission()
+                                : confirmSubmission();
                         }}
                         type="primary"
                         loading={loading}
@@ -645,19 +651,23 @@ function HKDTransferModal({open, region}) {
             </Modal>
             {
                 <Modal open={confirmModalOpen}>
-                    <div style={{marginBottom: '30px'}}>
-                        The Recipient Will Receive {`${(transferAmount)} ${currencyUnit(transferRegion)}`} From You,
-                        Are You Sure To Continue?
+                    <div style={{ marginBottom: "30px" }}>
+                        The Recipient Will Receive{" "}
+                        {`${transferAmount} ${currencyUnit(transferRegion)}`}{" "}
+                        From You, Are You Sure To Continue?
                     </div>
                     <Button
-                        onClick={()=>{setConfirm(false)}}
+                        onClick={() => {
+                            setConfirm(false);
+                        }}
                         type="outline"
                         className={styles.button}
-                    >CANCEL
+                    >
+                        CANCEL
                     </Button>
                     <Button
-                        type={'primary'}
-                        onClick={()=>{
+                        type={"primary"}
+                        onClick={() => {
                             submit({ useLedgerSign: false });
                             setConfirm(false);
                         }}
