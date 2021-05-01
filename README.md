@@ -34,7 +34,7 @@ To run the app:
 2.	Create a .env file in the root and add the following configuration. 
 ![alt text](https://github.com/longleilei/borderless/blob/wzc1/network.png)
 Switch between Private Network and Rinkeby Network by commenting out corresponding lines.
-5.	3.	Make sure you are using the correct version of Node (12.16.1).
+5. Make sure you are using the correct version of Node (12.16.1).
 6.	Start the app by running  npm run start  from the server directory first, then client directory.
 Now you are running the wallet locally. Open up your browser and navigate to http://localhost:3000.
 
