@@ -1,4 +1,17 @@
 # Borderless
+
+Borderless is a B2C cross-border transfer and foreign exchange application developed using OMG Network, a Layer-2 solution on top of Ethereum blockchain. 
+
+![alt text](https://github.com/longleilei/borderless/blob/wzc1/FXWallet.png)
+
+
+
+
+
+
+
+
+
 Require: Node 12.16.1
 
 To run the app:
